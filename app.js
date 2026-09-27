@@ -81,11 +81,23 @@ villages.forEach(village => {
 
   btn.dataset.village = village;
 
-  btn.onclick = () => {
+ btn.onclick = () => {
 
-    selectedVillage = village;
+  selectedVillage = village;
 
-   const allBtn = document.querySelector('.chip[data-village=""]');
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+
+  btn.classList.add("active");
+
+  render();
+
+};
+
+villageFilters.appendChild(btn);
+
+});
+
+const allBtn = document.querySelector('.chip[data-village=""]');
 
 allBtn.onclick = () => {
 
@@ -94,22 +106,6 @@ allBtn.onclick = () => {
   document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
 
   allBtn.classList.add("active");
-
-  render();
-
-};
-
-  villageFilters.appendChild(btn);
-
-});
-
-document.querySelector('.chip[data-village=""]').onclick = () => {
-
-  selectedVillage = "";
-
-  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-
-  document.querySelector('.chip[data-village=""]').classList.add("active");
 
   render();
 

@@ -203,3 +203,37 @@ cursor:pointer;
 color:var(--blue);
 font-weight:600;
 }
+
+.filter-row{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:14px 0 6px;
+scrollbar-width:none;
+}
+
+.filter-row::-webkit-scrollbar{
+display:none;
+}
+
+.chip{
+padding:10px 18px;
+border-radius:999px;
+border:none;
+background:white;
+color:var(--blue);
+font-weight:600;
+cursor:pointer;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+white-space:nowrap;
+transition:.25s;
+}
+
+.chip.active{
+background:linear-gradient(135deg,var(--blue),var(--blue2));
+color:white;
+}
+
+.chip:hover{
+transform:translateY(-2px);
+}

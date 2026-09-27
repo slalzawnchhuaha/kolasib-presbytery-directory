@@ -1,1 +1,1 @@
-# kolasib-presbytery-directory
+Starter app for GitHub upload.

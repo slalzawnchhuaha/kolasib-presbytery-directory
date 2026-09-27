@@ -1,59 +1,62 @@
 
-const searchInput = document.getElementById("q");
-const list = document.getElementById("list");
+const searchInput=document.getElementById("q");
+const list=document.getElementById("list");
 
-let contacts = [];
+let contacts=[];
 
-function render() {
-  const text = searchInput.value.toLowerCase().trim();
-  list.innerHTML = "";
-
-  const filtered = contacts.filter(c =>
-    (c.name || "").toLowerCase().includes(text) ||
-    (c.village || "").toLowerCase().includes(text) ||
-    (c.church || "").toLowerCase().includes(text) ||
-    (c.address || "").toLowerCase().includes(text) ||
-    String(c.phone || "").includes(text)
-  );
-
-  if (filtered.length === 0) {
-    list.innerHTML = "<p>No contacts found.</p>";
-    return;
-  }
-
-  filtered.forEach(c => {
-    list.innerHTML += `
-      <div class="card">
-        <h3>${c.name}</h3>
-        <p>📍 ${c.village || ""}</p>
-        <p>⛪ ${c.church || ""}</p>
-        <span class="badge">${c.department || ""}</span>
-        <p><a href="tel:${c.phone}">📞 ${c.phone}</a></p>
-      </div>
-    `;
-  });
+function initials(name){
+return name.split(" ").slice(0,2).map(n=>n[0]).join("").toUpperCase();
 }
 
-searchInput.addEventListener("input", render);
+function render(){
+
+const text=searchInput.value.toLowerCase().trim();
+
+list.innerHTML="";
+
+const filtered=contacts.filter(c=>
+(c.name||"").toLowerCase().includes(text)||
+(c.village||"").toLowerCase().includes(text)||
+(c.church||"").toLowerCase().includes(text)||
+(c.address||"").toLowerCase().includes(text)||
+String(c.phone||"").includes(text)
+);
+
+filtered.forEach(c=>{
+
+list.innerHTML+=`
+<div class="card">
+
+<div class="avatar">${initials(c.name)}</div>
+
+<h3>${c.name}</h3>
+
+<p>📍 ${c.village}</p>
+
+<p>⛪ ${c.church}</p>
+
+<span class="badge">${c.department}</span>
+
+<p><a href="tel:${c.phone}">📞 ${c.phone}</a></p>
+
+</div>`;
+});
+}
+
+searchInput.addEventListener("input",render);
 
 fetch("https://kolasib-presbytery-vawi-12-na-default-rtdb.asia-southeast1.firebasedatabase.app/contacts.json")
-  .then(res => res.json())
-  .then(data => {
-    .then(data => {
-    contacts = Object.values(data || {});
+.then(r=>r.json())
+.then(data=>{
 
-    document.getElementById("totalMembers").textContent = contacts.length;
+contacts=Object.values(data||{});
 
-    document.getElementById("totalVillages").textContent =
-        new Set(contacts.map(c => c.village)).size;
+document.getElementById("totalMembers").textContent=contacts.length;
 
-    document.getElementById("totalChurches").textContent =
-        new Set(contacts.map(c => c.church)).size;
+document.getElementById("totalVillages").textContent=new Set(contacts.map(c=>c.village)).size;
 
-    render();
-})
-  })
-  .catch(err => {
-    console.error(err);
-    list.innerHTML = "<p>Unable to load contacts.</p>";
-  });
+document.getElementById("totalChurches").textContent=new Set(contacts.map(c=>c.church)).size;
+
+render();
+
+});

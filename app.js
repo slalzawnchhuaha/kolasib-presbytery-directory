@@ -50,8 +50,6 @@ list.innerHTML+=`
 
 <p>⛪ ${c.church}</p>
 
-<span class="badge">${c.department}</span>
-
 <p><a class="call-btn" href="tel:${c.phone}">📞 Call ${c.phone}</a></p>
 
 </div>`;

@@ -39,13 +39,8 @@ function render() {
 searchInput.addEventListener("input", render);
 
 const contactsRef = ref(db, "contacts");
-
 onValue(contactsRef, (snapshot) => {
-  contacts = [];
-
-  snapshot.forEach((child) => {
-    contacts.push(child.val());
-  });
-
+  const data = snapshot.val() || {};
+  contacts = Object.values(data);
   render();
 });

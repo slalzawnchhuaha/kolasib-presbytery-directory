@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Import Contacts</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<style>
+body{
+font-family:Arial;
+max-width:700px;
+margin:40px auto;
+padding:20px;
+background:#f5f7fb;
+}
+h1{color:#123F91;}
+button{
+background:#123F91;
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+input{
+padding:10px;
+width:100%;
+margin:15px 0;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Kolasib Presbytery Import</h1>
+
+<p>Select your Excel file and upload it to Firebase.</p>
+
+<input type="file" id="excelFile" accept=".xlsx,.xls">
+
+<button id="uploadBtn">Upload Contacts</button>
+
+<p id="status"></p>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+const firebaseConfig={
+apiKey:"AIzaSyCSzp3WT1U8S-_1zlxP1xEE0sSX5ssrv-E",
+authDomain:"kolasib-presbytery-vawi-12-na.firebaseapp.com",
+databaseURL:"https://kolasib-presbytery-vawi-12-na-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId:"kolasib-presbytery-vawi-12-na",
+storageBucket:"kolasib-presbytery-vawi-12-na.firebasestorage.app",
+messagingSenderId:"515741204477",
+appId:"1:515741204477:web:995e01bfffdcb1c553a2394"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app);
+
+document.getElementById("uploadBtn").onclick=()=>{
+
+const file=document.getElementById("excelFile").files[0];
+
+if(!file){
+alert("Select an Excel file first.");
+return;
+}
+
+const reader=new FileReader();
+
+reader.onload=e=>{
+
+const workbook=XLSX.read(e.target.result,{type:"binary"});
+const sheet=workbook.Sheets[workbook.SheetNames[0]];
+const data=XLSX.utils.sheet_to_json(sheet);
+
+let count=0;
+
+data.forEach((row,index)=>{
+
+const id="contact"+(index+1);
+
+set(ref(db,"contacts/"+id),{
+
+name:row["Thleng tur"]||"",
+address:row["Veng"]||"",
+phone:String(row["Phone Number"]||""),
+village:row["Veng"]||"",
+church:row["Thlen In"]||"",
+department:"Ei Leh In"
+
+});
+
+count++;
+
+});
+
+document.getElementById("status").innerHTML=
+count+" contacts uploaded successfully.";
+
+};
+
+reader.readAsBinaryString(file);
+
+};
+
+</script>
+
+</body>
+</html>

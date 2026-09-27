@@ -1,1 +1,159 @@
-body{margin:0;font-family:Arial;background:#0b3d91;color:#fff}header{padding:20px;background:#123f91;position:sticky;top:0}h1{margin:0 0 12px}input{width:100%;padding:12px;border-radius:10px;border:none}main{padding:16px}.card{background:#fff;color:#111;padding:16px;border-radius:14px;margin-bottom:12px}.badge{display:inline-block;background:#e8f0ff;padding:4px 8px;border-radius:999px;font-size:12px;margin-top:6px}a{color:#0b57d0;text-decoration:none;font-weight:bold}
+:root{
+--blue:#0A3D91;
+--blue2:#174EA6;
+--gold:#D4AF37;
+--bg:#F4F7FC;
+--card:#ffffff;
+--text:#1f2937;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Poppins,sans-serif;
+background:var(--bg);
+color:var(--text);
+padding-bottom:90px;
+}
+
+.hero{
+background:linear-gradient(135deg,var(--blue),var(--blue2));
+color:white;
+padding:45px 20px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.logo-circle{
+width:70px;
+height:70px;
+border-radius:50%;
+background:var(--gold);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+margin:auto auto 15px;
+color:var(--blue);
+font-weight:bold;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+.hero p{
+opacity:.9;
+margin-top:6px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+padding:20px;
+}
+
+.stat-card{
+background:white;
+border-radius:18px;
+padding:18px;
+text-align:center;
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.stat-card h2{
+color:var(--blue);
+font-size:30px;
+}
+
+.search-section{
+padding:0 20px 20px;
+position:sticky;
+top:0;
+background:var(--bg);
+z-index:100;
+}
+
+#q{
+width:100%;
+padding:15px;
+font-size:16px;
+border:none;
+border-radius:14px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+outline:none;
+}
+
+#list{
+padding:0 20px 20px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.card{
+background:white;
+border-radius:20px;
+padding:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+.card h3{
+color:var(--blue);
+margin-bottom:8px;
+}
+
+.card p{
+margin:5px 0;
+}
+
+.badge{
+display:inline-block;
+background:#EEF4FF;
+color:var(--blue);
+padding:6px 10px;
+border-radius:999px;
+font-size:12px;
+margin:8px 0;
+}
+
+.card a{
+color:var(--blue);
+font-weight:600;
+text-decoration:none;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+box-shadow:0 -6px 20px rgba(0,0,0,.08);
+}
+
+.bottom-nav button{
+background:none;
+border:none;
+font-size:14px;
+color:#666;
+cursor:pointer;
+}
+
+.bottom-nav .active{
+color:var(--blue);
+font-weight:600;
+}

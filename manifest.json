@@ -1,1 +1,10 @@
-{"name":"Kolasib Presbytery Directory","short_name":"Directory","start_url":"/kolasib-presbytery-directory/","display":"standalone","background_color":"#0b3d91","theme_color":"#0b3d91"}
+
+{
+"name":"Kolasib Presbytery",
+"short_name":"Presbytery",
+"display":"standalone",
+"background_color":"#0A3D91",
+"theme_color":"#0A3D91",
+"start_url":".",
+"icons":[]
+}

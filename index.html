@@ -1,29 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kolasib Presbytery Directory</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+<title>Kolasib Presbytery Digital Portal</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <header>
-    <h1>Kolasib Presbytery Directory</h1>
+<header class="hero">
 
-    <input
-      id="q"
-      type="text"
-      placeholder="Search by name, village, church or phone">
-  </header>
+<div class="hero-content">
 
-  <main id="list"></main>
+<div class="logo-circle">
+✝
+</div>
 
-  <!-- IMPORTANT: This must be type="module" -->
-  <script type="module" src="app.js"></script>
+<h1>Kolasib Presbytery</h1>
+
+<p>Ei Leh In Department Directory</p>
+
+</div>
+
+</header>
+
+<section class="stats">
+
+<div class="stat-card">
+<h2 id="totalMembers">0</h2>
+<span>Members</span>
+</div>
+
+<div class="stat-card">
+<h2 id="totalVillages">0</h2>
+<span>Villages</span>
+</div>
+
+<div class="stat-card">
+<h2 id="totalChurches">0</h2>
+<span>Churches</span>
+</div>
+
+</section>
+
+<section class="search-section">
+
+<input
+id="q"
+placeholder="🔍 Search name, village, church or phone">
+
+</section>
+
+<main id="list"></main>
+
+<nav class="bottom-nav">
+
+<button class="active">Directory</button>
+
+<button>Schedule</button>
+
+<button>News</button>
+
+<button>Downloads</button>
+
+</nav>
+
+<script type="module" src="app.js"></script>
 
 </body>
 </html>

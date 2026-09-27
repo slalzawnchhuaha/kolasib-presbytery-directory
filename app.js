@@ -1,1 +1,38 @@
-const data=[{name:'Demo User',address:'Kolasib',phone:'9000000000'}];const q=document.getElementById('q');const list=document.getElementById('list');function render(){const t=q.value.toLowerCase();list.innerHTML='';data.filter(r=>Object.values(r).join(' ').toLowerCase().includes(t)).forEach(r=>list.innerHTML+=`<div class="card"><b>${r.name}</b><br>${r.address}<br><a href="tel:${r.phone}">${r.phone}</a></div>`)}q.oninput=render;render();
+
+import { db } from "./firebase-config.js";
+import { ref, onValue } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+const searchInput = document.getElementById("q");
+const list = document.getElementById("list");
+
+let contacts = [];
+
+function render() {
+  const text = searchInput.value.toLowerCase();
+  list.innerHTML = "";
+
+  contacts
+    .filter(c =>
+      (c.name || "").toLowerCase().includes(text) ||
+      (c.address || "").toLowerCase().includes(text) ||
+      (c.phone || "").includes(text)
+    )
+    .forEach(c => {
+      list.innerHTML += `
+        <div class="card">
+          <b>${c.name}</b><br>
+          ${c.address}<br>
+          <a href="tel:${c.phone}">${c.phone}</a>
+        </div>`;
+    });
+}
+
+searchInput.addEventListener("input", render);
+
+const contactsRef = ref(db, "contacts");
+
+onValue(contactsRef, snapshot => {
+  contacts = [];
+  snapshot.forEach(child => contacts.push(child.val()));
+  render();
+});

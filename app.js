@@ -1,6 +1,8 @@
 
 const searchInput=document.getElementById("q");
 const list=document.getElementById("list");
+const villageFilters=document.getElementById("villageFilters");
+let selectedVillage="";
 
 let contacts=[];
 
@@ -14,13 +16,26 @@ const text=searchInput.value.toLowerCase().trim();
 
 list.innerHTML="";
 
-const filtered=contacts.filter(c=>
-(c.name||"").toLowerCase().includes(text)||
-(c.village||"").toLowerCase().includes(text)||
-(c.church||"").toLowerCase().includes(text)||
-(c.address||"").toLowerCase().includes(text)||
-String(c.phone||"").includes(text)
-);
+const filtered = contacts.filter(c => {
+
+  const matchesSearch =
+    (c.name || "").toLowerCase().includes(text) ||
+    (c.village || "").toLowerCase().includes(text) ||
+    (c.church || "").toLowerCase().includes(text) ||
+    (c.address || "").toLowerCase().includes(text) ||
+    String(c.phone || "").includes(text);
+
+  const matchesVillage =
+    selectedVillage === "" || c.village === selectedVillage;
+
+  return matchesSearch && matchesVillage;
+
+});
+  
+  if (filtered.length === 0) {
+  list.innerHTML = "<p style='text-align:center;padding:30px;'>No contacts found.</p>";
+  return;
+}
 
 filtered.forEach(c=>{
 
@@ -56,6 +71,51 @@ fetch("https://kolasib-presbytery-vawi-12-na-default-rtdb.asia-southeast1.fireba
     document.getElementById("totalChurches").textContent =
       new Set(contacts.map(c => c.church).filter(Boolean)).size;
 
+    const villages = [...new Set(contacts.map(c => c.village).filter(Boolean))].sort();
+
+villages.forEach(village => {
+
+  const btn = document.createElement("button");
+
+  btn.className = "chip";
+
+  btn.textContent = village;
+
+  btn.dataset.village = village;
+
+  btn.onclick = () => {
+
+    selectedVillage = village;
+
+   const allBtn = document.querySelector('.chip[data-village=""]');
+
+allBtn.onclick = () => {
+
+  selectedVillage = "";
+
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+
+  allBtn.classList.add("active");
+
+  render();
+
+};
+
+  villageFilters.appendChild(btn);
+
+});
+
+document.querySelector('.chip[data-village=""]').onclick = () => {
+
+  selectedVillage = "";
+
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+
+  document.querySelector('.chip[data-village=""]').classList.add("active");
+
+  render();
+
+};
     render();
   })
   .catch(err => {

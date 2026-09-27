@@ -37,7 +37,7 @@ list.innerHTML+=`
 
 <span class="badge">${c.department}</span>
 
-<p><a href="tel:${c.phone}">📞 ${c.phone}</a></p>
+<p><a class="call-btn" href="tel:${c.phone}">📞 Call ${c.phone}</a></p>
 
 </div>`;
 });

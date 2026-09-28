@@ -57,7 +57,7 @@ function render() {
     const data = snap.val() || {};
 
     container.innerHTML = `
-      <<div class="programme-card agenda-card">
+      <div class="programme-card agenda-card">
   <div class="details">
           <h3>📝 Agenda</h3>
           <p style="white-space:pre-line;">${data.agenda || "No agenda yet."}</p>

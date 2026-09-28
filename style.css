@@ -278,6 +278,8 @@ align-items:center;
 gap:15px;
 cursor:pointer;
 box-shadow:0 12px 30px rgba(0,0,0,.08);
+  text-decoration:none;
+color:inherit;
 transition:.25s;
 text-align:left;
 }

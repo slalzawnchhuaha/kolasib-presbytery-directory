@@ -87,3 +87,13 @@ if (adminLogo) {
   adminLogo.addEventListener("pointercancel", cancelPress);
   adminLogo.addEventListener("contextmenu", (e) => e.preventDefault());
 }
+
+// ===== YouTube Live Button =====
+
+const btnLive = document.getElementById("btnLive");
+
+if (btnLive) {
+  btnLive.addEventListener("click", () => {
+    window.location.href = "live.html";
+  });
+}

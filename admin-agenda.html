@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit Agenda</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="hero small-hero">
+  <div class="top-bar">
+    <a href="admin-programme.html" class="back-btn">← Back</a>
+  </div>
+
+  <div class="hero-content">
+    <div class="logo-circle">
+      <img src="logo.png.png" alt="PCI Logo">
+    </div>
+    <h1>Edit Agenda</h1>
+    <p>Admin Panel</p>
+  </div>
+</header>
+
+<section class="programme-header">
+  <div class="theme-card">
+
+    <label class="admin-label">Agenda</label>
+    <textarea id="agendaText" class="admin-input" rows="8"></textarea>
+
+    <label class="admin-label">Bial</label>
+    <textarea id="bialText" class="admin-input" rows="8"></textarea>
+
+    <button id="saveAgenda" class="admin-btn">Save</button>
+
+    <p id="statusMsg"></p>
+
+  </div>
+</section>
+
+<script type="module" src="admin-agenda.js"></script>
+
+</body>
+</html>

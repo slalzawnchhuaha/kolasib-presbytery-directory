@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manage Members</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="hero small-hero">
+
+<div class="top-bar">
+<a href="admin.html" class="back-btn">← Admin</a>
+</div>
+
+<div class="hero-content">
+
+<div class="logo-circle">
+<img src="logo.png.png" alt="PCI Logo">
+</div>
+
+<h1>Manage Members</h1>
+<p>Admin Panel</p>
+
+</div>
+
+</header>
+
+<section class="search-section">
+
+<input id="adminSearch" placeholder="Search members">
+
+</section>
+
+<section class="dashboard" style="padding-top:0;">
+
+<button class="menu-btn" id="addMemberBtn">
+<span class="icon">➕</span>
+<div>
+<strong>Add Member</strong>
+<small>Create a new record</small>
+</div>
+</button>
+
+</section>
+
+<main id="adminMemberList"></main>
+
+<script type="module" src="admin-directory.js"></script>
+
+</body>
+</html>

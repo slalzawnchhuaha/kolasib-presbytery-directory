@@ -1,114 +1,87 @@
-const parkingData=[
-{
-id:"parking1",
-name:"Parking Area 1",
-vehicle:"2 & 4 Wheeler",
-coords:"24.233085,92.673818",
-img:"parking-map.jpg"
-},
-{
-id:"parking2",
-name:"Parking Area 2",
-vehicle:"2 Wheeler",
-coords:"24.233690,92.673706",
-img:"parking-map.jpg"
-},
-{
-id:"parking3",
-name:"Parking Area 3",
-vehicle:"4 Wheeler",
-coords:"24.233222,92.674056",
-img:"parking-map.jpg"
-},
-{
-id:"parking4",
-name:"Parking Area 4",
-vehicle:"2 Wheeler",
-coords:"24.232905,92.673848",
-img:"parking-map.jpg"
-},
-{
-id:"parking5",
-name:"Parking Area 5",
-vehicle:"2 Wheeler",
-coords:"24.232992,92.673505",
-img:"parking-map.jpg"
-},
-{
-id:"parking6",
-name:"Parking Area 6",
-vehicle:"2 Wheeler",
-coords:"24.233094,92.673300",
-img:"parking-map.jpg"
-},
-{
-id:"parking7",
-name:"Parking Area 7",
-vehicle:"2 & 4 Wheeler",
-coords:"24.233650,92.674269",
-img:"parking-map.jpg"
-},
-{
-id:"parking8",
-name:"Parking Area 8",
-vehicle:"2 & 4 Wheeler",
-coords:"24.233642,92.674706",
-img:"parking-map.jpg"
-},
-{
-id:"reserve",
-name:"Reserve Parking",
-vehicle:"2 & 4 Wheeler",
-coords:"24.233180,92.674694",
-img:"parking-map.jpg"
-},
-{
-id:"parking9",
-name:"Parking Area 9",
-vehicle:"2 & 4 Wheeler",
-coords:"24.232648,92.673365",
-img:"parking-map.jpg"
-},
-{
-id:"parking10",
-name:"Parking Area 10",
-vehicle:"2 & 4 Wheeler",
-coords:"24.232642,92.672882",
-img:"parking-map.jpg"
-}
-];
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  onValue
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-const container=document.getElementById("parkingCards");
+// Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyCSzp3WT1U8S-_1zlxP1xEE0sSX5ssrv-E",
+  authDomain: "kolasib-presbytery-vawi-12-na.firebaseapp.com",
+  databaseURL: "https://kolasib-presbytery-vawi-12-na-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "kolasib-presbytery-vawi-12-na",
+  storageBucket: "kolasib-presbytery-vawi-12-na.firebasestorage.app",
+  messagingSenderId: "515741204477",
+  appId: "1:515741204477:web:995e01bfffdb1c553a2394"
+};
 
-parkingData.forEach(p=>{
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-container.innerHTML+=`
-<div class="parking-card" id="${p.id}">
+const container = document.getElementById("parkingCards");
 
-<h3>${p.name}</h3>
+let parkingData = [];
 
-<span class="vehicle-badge">${p.vehicle}</span>
+// Live updates from Firebase
+onValue(ref(db, "parking"), (snap) => {
 
-<p>📍 ${p.coords}</p>
+  const data = snap.val() || {};
 
-<a class="navigate-btn"
-href="https://www.google.com/maps?q=${p.coords}"
-target="_blank">
+  parkingData = Object.entries(data).map(([id, value]) => ({
+    id,
+    ...value
+  }));
 
-Navigate with Google Maps
+  render();
 
-</a>
-
-</div>`;
 });
 
-function jumpTo(id){
+function render() {
 
-document.querySelectorAll(".parking-card").forEach(c=>c.classList.remove("active"));
+  container.innerHTML = "";
 
-const card=document.getElementById(id);
+  parkingData.forEach(p => {
 
-card.classList.add("active");
+    const coords = `${p.latitude},${p.longitude}`;
 
-card.scrollIntoView({behavior:"smooth"});
+    container.innerHTML += `
+      <div class="parking-card" id="${p.id}">
+
+        <h3>${p.name}</h3>
+
+        <span class="vehicle-badge">${p.type || "Parking"}</span>
+
+        <p>📍 ${coords}</p>
+
+        <a class="navigate-btn"
+           href="https://www.google.com/maps?q=${coords}"
+           target="_blank">
+
+          Navigate with Google Maps
+
+        </a>
+
+      </div>`;
+  });
+
 }
+
+// Keep your existing map-pin feature
+window.jumpTo = function(id){
+
+  document.querySelectorAll(".parking-card")
+    .forEach(c => c.classList.remove("active"));
+
+  const card = document.getElementById(id);
+
+  if (!card) return;
+
+  card.classList.add("active");
+
+  card.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+};

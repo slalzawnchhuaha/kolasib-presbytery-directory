@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const container = document.getElementById("programmeList");
+const container = document.getElementById("programmeContent");
 
 function timeToMinutes(t) {
   const m = (t || "").match(/(\d+):(\d+)\s*(AM|PM)/i);

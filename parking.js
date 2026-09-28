@@ -85,8 +85,6 @@ parkingData.forEach(p=>{
 container.innerHTML+=`
 <div class="parking-card" id="${p.id}">
 
-<img src="${p.img}" class="parking-photo">
-
 <h3>${p.name}</h3>
 
 <span class="vehicle-badge">${p.vehicle}</span>

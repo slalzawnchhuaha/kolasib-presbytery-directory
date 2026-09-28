@@ -40,36 +40,28 @@
 
     <div class="theme-card">
 
-  <div class="theme-card">
-
   <input
     type="file"
     id="photo"
     accept="image/*"
     capture="environment"
+    onchange="previewPhoto(event)"
     style="display:none;">
 
-  <button
-    type="button"
-    id="choosePhoto"
+  <label
+    for="photo"
     class="admin-btn"
-    style="margin-bottom:15px;">
+    style="display:block;text-align:center;margin-bottom:15px;cursor:pointer;">
 
     📷 Choose Photo
 
-  </button>
+  </label>
 
   <img
     id="photoPreview"
     style="display:none;width:100%;max-height:250px;border-radius:15px;object-fit:cover;">
 
   <p id="photoStatus">No photo selected.</p>
-
-</div>
-
-  <img
-    id="photoPreview"
-    style="display:none;width:100%;max-height:220px;border-radius:12px;object-fit:cover;margin-top:12px;">
 
 </div>
 

@@ -24,44 +24,74 @@ const counterId = params.get("id");
 
 const numberInput = document.getElementById("counterNumber");
 const locationInput = document.getElementById("location");
+const photoInput = document.getElementById("photo");
+const photoPreview = document.getElementById("photoPreview");
+const photoStatus = document.getElementById("photoStatus");
 const statusMsg = document.getElementById("statusMsg");
 
-async function loadCounter(){
+let currentPhoto = "";
+
+async function loadCounter() {
 
   const snap = await get(ref(db, "refreshment/" + counterId));
 
-  if(!snap.exists()) return;
+  if (!snap.exists()) return;
 
   const data = snap.val();
 
   numberInput.value = data.number || "";
   locationInput.value = data.location || "";
+
+  currentPhoto = data.photo || "";
+
+  if (currentPhoto) {
+    photoPreview.src = "refreshment/" + currentPhoto;
+    photoPreview.style.display = "block";
+    photoStatus.textContent = currentPhoto;
+  }
+
 }
 
-const photoInput = document.getElementById("photo");
-const preview = document.getElementById("photoPreview");
+photoInput.addEventListener("change", () => {
 
-photoInput.value = data.photo || "";
+  const file = photoInput.files[0];
 
-if (data.photo) {
-  preview.src = `refreshment/${data.photo}`;
-  preview.style.display = "block";
-}
-loadCounter();
+  if (!file) return;
 
-document.getElementById("saveCounter").addEventListener("click", async ()=>{
+  currentPhoto = file.name;
 
-  await update(ref(db,"refreshment/"+counterId),{
-  number:numberInput.value.trim(),
-  location:locationInput.value.trim(),
-  photo:photoInput.value.trim()
+  photoPreview.src = URL.createObjectURL(file);
+  photoPreview.style.display = "block";
+  photoStatus.textContent = file.name;
+
 });
 
-  statusMsg.textContent="✅ Counter updated.";
-  statusMsg.style.color="green";
+loadCounter();
 
-  setTimeout(()=>{
-    window.location.href="admin-refreshment.html";
-  },1000);
+document.getElementById("saveCounter").addEventListener("click", async () => {
+
+  try {
+
+    await update(ref(db, "refreshment/" + counterId), {
+      number: numberInput.value.trim(),
+      location: locationInput.value.trim(),
+      photo: currentPhoto
+    });
+
+    statusMsg.textContent = "✅ Counter updated.";
+    statusMsg.style.color = "green";
+
+    setTimeout(() => {
+      location.href = "admin-refreshment.html";
+    }, 800);
+
+  } catch (err) {
+
+    console.error(err);
+
+    statusMsg.textContent = "❌ Update failed.";
+    statusMsg.style.color = "red";
+
+  }
 
 });

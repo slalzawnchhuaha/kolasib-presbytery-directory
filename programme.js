@@ -2,7 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   getDatabase,
   ref,
-  onValue
+  onValue,
+  get
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 // Firebase Configuration
@@ -49,17 +50,31 @@ function render() {
 
   container.innerHTML = "";
 
-  if (currentTab === "agenda") {
+ if (currentTab === "agenda") {
+
+  get(ref(db, "agenda")).then((snap) => {
+
+    const data = snap.val() || {};
 
     container.innerHTML = `
       <div class="programme-card">
         <div class="details">
-          <h3>Agenda</h3>
-          <p>The agenda section will be added later.</p>
+          <h3>📝 Agenda</h3>
+          <p style="white-space:pre-line;">${data.agenda || "No agenda yet."}</p>
         </div>
-      </div>`;
-    return;
-  }
+      </div>
+
+      <div class="programme-card">
+        <div class="details">
+          <h3>📍 Bial</h3>
+          <p style="white-space:pre-line;">${data.bial || "No bial yet."}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  return;
+}
 
   const selectedDate = dateMap[currentTab];
 

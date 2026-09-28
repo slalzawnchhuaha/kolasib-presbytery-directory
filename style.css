@@ -572,3 +572,25 @@ visibility:visible;
 .scroll-top-btn:hover{
   transform:scale(1.08);
 }
+
+#scrollTopBtn{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background: #0A3D91;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+  z-index: 99999;
+  display: none;
+}
+
+#scrollTopBtn:hover{
+  background:#174EA6;
+}

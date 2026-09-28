@@ -35,15 +35,30 @@ fetch("https://kolasib-presbytery-vawi-12-na-default-rtdb.asia-southeast1.fireba
   })
   .catch(console.error);
 
-// Visitor counter
+// ===== Smart Visitor Counter (One visit per device per day) =====
+
 const visitorEl = document.getElementById("visitorCount");
 const visitsRef = ref(db, "stats/visits");
 
-runTransaction(visitsRef, current => (current || 0) + 1)
-  .then(() => get(visitsRef))
-  .then(snapshot => {
+const today = new Date().toISOString().split("T")[0];
+const lastVisit = localStorage.getItem("lastVisitDate");
+
+async function updateVisitorCounter() {
+  try {
+    if (lastVisit !== today) {
+      await runTransaction(visitsRef, current => (current || 0) + 1);
+      localStorage.setItem("lastVisitDate", today);
+    }
+
+    const snapshot = await get(visitsRef);
+
     if (visitorEl) {
       visitorEl.textContent = snapshot.val() || 0;
     }
-  })
-  .catch(console.error);
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+updateVisitorCounter();

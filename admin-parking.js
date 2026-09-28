@@ -35,11 +35,7 @@ async function loadParking() {
     id,
     ...value
   }));
-const initBtn = document.getElementById("initParkingBtn");
 
-if (initBtn && parkingAreas.length > 1) {
-  initBtn.style.display = "none";
-}
   render();
 
 }
@@ -102,8 +98,8 @@ loadParking();
 
 const initBtn = document.getElementById("initParkingBtn");
 
-if (initBtn) {
-  initBtn.addEventListener("click", async () => {
+initBtn.addEventListener("click", async () => {
+  try {
 
     if (!confirm("Create the default Parking 1–10 layout?")) return;
 
@@ -121,11 +117,13 @@ if (initBtn) {
       parking10:{name:"Parking Area 10",type:"2 & 4 Wheeler",latitude:"24.232642",longitude:"92.672882"}
     };
 
-    await set(ref(db,"parking"), defaults);
-
-    loadParking();
+    await set(ref(db, "parking"), defaults);
+    await loadParking();
 
     alert("Parking layout created successfully.");
 
-  });
-}
+  } catch (err) {
+    console.error(err);
+    alert("Failed: " + err.message);
+  }
+});

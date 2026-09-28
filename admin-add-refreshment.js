@@ -22,6 +22,25 @@ const db = getDatabase(app);
 const saveBtn = document.getElementById("saveCounter");
 const statusMsg = document.getElementById("statusMsg");
 
+const photoInput = document.getElementById("photo");
+const preview = document.getElementById("photoPreview");
+
+photoInput.addEventListener("input", () => {
+
+  const file = photoInput.value.trim();
+
+  if (!file) {
+
+    preview.style.display = "none";
+
+    return;
+  }
+
+  preview.src = `refreshment/${file}`;
+  preview.style.display = "block";
+
+});
+
 saveBtn.addEventListener("click", async () => {
 
   const item = {

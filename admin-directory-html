@@ -38,13 +38,13 @@
 
 <section class="dashboard" style="padding-top:0;">
 
-<button class="menu-btn" id="addMemberBtn">
+<a href="admin-add-member.html" class="menu-btn">
 <span class="icon">➕</span>
 <div>
 <strong>Add Member</strong>
 <small>Create a new record</small>
 </div>
-</button>
+</a>
 
 </section>
 

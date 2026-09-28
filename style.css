@@ -680,3 +680,22 @@ font-size:12px;
 font-weight:600;
 margin-left:8px;
 }
+
+.countdown{
+display:inline-block;
+background:#0EA5E9;
+color:white;
+padding:6px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:600;
+margin-left:8px;
+}
+
+.programme-card{
+transition:.25s;
+}
+
+.programme-card:hover{
+transform:translateY(-3px);
+}

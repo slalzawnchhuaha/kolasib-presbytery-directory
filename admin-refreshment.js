@@ -30,10 +30,9 @@ async function loadCounters() {
 
   const data = snap.val() || {};
 
-  counters = Object.entries(data).map(([id, value]) => ({
-    id,
-    ...value
-  }));
+ counters = Object.entries(data)
+  .map(([id, value]) => ({ id, ...value }))
+  .sort((a, b) => Number(a.number) - Number(b.number));
 
   render();
 }
@@ -41,8 +40,6 @@ async function loadCounters() {
 function render() {
 
   list.innerHTML = "";
-
-  counters.sort((a,b)=>Number(a.number)-Number(b.number));
 
   counters.forEach(c => {
 

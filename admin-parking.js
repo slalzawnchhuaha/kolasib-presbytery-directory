@@ -68,9 +68,9 @@ function render() {
             🗺️ Maps
           </a>
 
-          <a href="admin-edit-parking.html?id=${p.id}" class="edit-btn">
-            ✏️ Edit
-          </a>
+         <a href="./admin-edit-parking.html?id=${p.id}" class="edit-btn">
+  ✏️ Edit
+</a>
 
           <button class="delete-btn" data-id="${p.id}">
             🗑️ Delete

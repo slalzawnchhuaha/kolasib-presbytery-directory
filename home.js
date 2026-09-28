@@ -62,3 +62,30 @@ async function updateVisitorCounter() {
 }
 
 updateVisitorCounter();
+// ===== Secret Admin Access =====
+
+const adminLogo = document.getElementById("adminLogo");
+
+if (adminLogo) {
+
+  let pressTimer;
+
+  adminLogo.addEventListener("mousedown", () => {
+    pressTimer = setTimeout(() => {
+      window.location.href = "admin-login.html";
+    }, 5000);
+  });
+
+  adminLogo.addEventListener("mouseup", () => clearTimeout(pressTimer));
+  adminLogo.addEventListener("mouseleave", () => clearTimeout(pressTimer));
+
+  // Mobile support
+  adminLogo.addEventListener("touchstart", () => {
+    pressTimer = setTimeout(() => {
+      window.location.href = "admin-login.html";
+    }, 5000);
+  });
+
+  adminLogo.addEventListener("touchend", () => clearTimeout(pressTimer));
+
+}

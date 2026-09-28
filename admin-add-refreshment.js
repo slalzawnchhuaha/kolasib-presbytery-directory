@@ -1,10 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-  set
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-// Firebase Config
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCSzp3WT1U8S-_1zlxP1xEE0sSX5ssrv-E",
   authDomain: "kolasib-presbytery-vawi-12-na.firebaseapp.com",
@@ -18,61 +14,57 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const saveBtn = document.getElementById("saveCounter");
-const statusMsg = document.getElementById("statusMsg");
-
 const photoInput = document.getElementById("photo");
-const choosePhoto = document.getElementById("choosePhoto");
 const photoPreview = document.getElementById("photoPreview");
 const photoStatus = document.getElementById("photoStatus");
+const statusMsg = document.getElementById("statusMsg");
 
-let selectedPhoto = null;
-
-choosePhoto.addEventListener("click", () => {
-  photoInput.click();
-});
+let selectedPhoto = "";
 
 photoInput.addEventListener("change", () => {
 
-  selectedPhoto = photoInput.files[0];
+  const file = photoInput.files[0];
 
-  if (!selectedPhoto) return;
+  if (!file) return;
 
-  photoPreview.src = URL.createObjectURL(selectedPhoto);
+  selectedPhoto = file.name;
+
+  photoPreview.src = URL.createObjectURL(file);
   photoPreview.style.display = "block";
-  photoStatus.textContent = selectedPhoto.name;
+  photoStatus.textContent = file.name;
 
 });
 
-saveBtn.addEventListener("click", async () => {
+document.getElementById("saveCounter").addEventListener("click", async () => {
 
-  const item = {
-  number: document.getElementById("counterNumber").value.trim(),
-  location: document.getElementById("location").value.trim(),
-  photo: selectedPhoto ? selectedPhoto.name : ""
-};
+  const number = document.getElementById("counterNumber").value.trim();
+  const location = document.getElementById("location").value.trim();
 
-  if (!item.number || !item.location) {
+  if (!number || !location) {
     alert("Counter Number and Location are required.");
     return;
   }
 
   try {
 
-    await push(ref(db, "refreshment"), item);
+    await set(ref(db, `refreshment/counter${number}`), {
+      number,
+      location,
+      photo: selectedPhoto
+    });
 
-    statusMsg.textContent = "✅ Counter saved successfully.";
+    statusMsg.textContent = "✅ Counter saved.";
     statusMsg.style.color = "green";
 
     setTimeout(() => {
-      window.location.href = "admin-refreshment.html";
-    }, 1000);
+      location.href = "admin-refreshment.html";
+    }, 800);
 
   } catch (err) {
 
     console.error(err);
 
-    statusMsg.textContent = "❌ Failed to save counter.";
+    statusMsg.textContent = "❌ Save failed.";
     statusMsg.style.color = "red";
 
   }

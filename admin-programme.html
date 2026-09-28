@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manage Programme</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="hero small-hero">
+
+  <div class="top-bar">
+    <a href="admin.html" class="back-btn">← Admin</a>
+  </div>
+
+  <div class="hero-content">
+    <div class="logo-circle">
+      <img src="logo.png.png" alt="PCI Logo">
+    </div>
+
+    <h1>Manage Programme</h1>
+    <p>Admin Panel</p>
+  </div>
+
+</header>
+
+<section class="search-section">
+  <input id="programmeSearch" placeholder="🔍 Search programme">
+</section>
+
+<section class="dashboard" style="padding-top:0;">
+
+  <a href="admin-add-programme.html" class="menu-btn">
+    <span class="icon">➕</span>
+    <div>
+      <strong>Add Programme Item</strong>
+      <small>Create a new schedule entry</small>
+    </div>
+  </a>
+
+</section>
+
+<main id="programmeList"></main>
+
+<script type="module" src="admin-programme.js"></script>
+
+</body>
+</html>

@@ -432,6 +432,9 @@ border-radius:20px;
 .parking-map{
 width:100%;
 display:block;
+height:auto;
+min-height:300px;
+object-fit:cover;
 }
 
 .map-pin{

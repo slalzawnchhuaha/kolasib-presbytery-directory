@@ -118,6 +118,31 @@ allBtn.onclick = () => {
   })
   .catch(err => {
     console.error(err);
+
+    // ===== Scroll to Top =====
+
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", () => {
+
+  if (!scrollBtn) return;
+
+  if (window.scrollY > 350) {
+    scrollBtn.classList.add("show");
+  } else {
+    scrollBtn.classList.remove("show");
+  }
+
+});
+
+if (scrollBtn) {
+  scrollBtn.onclick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+}
     list.innerHTML =
       "<p style='text-align:center;padding:40px;'>Unable to load contacts.</p>";
   });

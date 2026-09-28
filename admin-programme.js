@@ -68,7 +68,9 @@ function render(){
 
         <div class="admin-actions">
 
-          <button class="edit-btn">✏️ Edit</button>
+          <a href="admin-edit-programme.html?id=${i.id}" class="edit-btn">
+  ✏️ Edit
+</a>
 
           <button class="delete-btn" data-id="${i.id}">
             🗑️ Delete
@@ -83,16 +85,18 @@ function render(){
 
 search.addEventListener("input",render);
 
-list.addEventListener("click",async e=>{
+list.addEventListener("click", async e => {
 
-  if(!e.target.classList.contains("delete-btn")) return;
+  // Delete
+  if (e.target.classList.contains("delete-btn")) {
 
-  if(confirm("Delete this programme item?")){
+    if (!confirm("Delete this programme item?")) return;
 
-    await remove(ref(db,"programme/"+e.target.dataset.id));
+    await remove(ref(db, "programme/" + e.target.dataset.id));
 
     loadProgramme();
 
+    return;
   }
 
 });

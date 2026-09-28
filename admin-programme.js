@@ -68,7 +68,7 @@ function render(){
 
         <div class="admin-actions">
 
-          <a href="admin-edit-programme.html?id=${i.id}" class="edit-btn">
+          <a href="add-edit-programme.html?id=${i.id}" class="edit-btn">
   ✏️ Edit
 </a>
 

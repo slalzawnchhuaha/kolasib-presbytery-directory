@@ -34,7 +34,11 @@ async function loadParking() {
     id,
     ...value
   }));
+const initBtn = document.getElementById("initParkingBtn");
 
+if (initBtn && parkingAreas.length > 1) {
+  initBtn.style.display = "none";
+}
   render();
 
 }

@@ -308,19 +308,53 @@ color:#6b7280;
 
 .live-btn{
 grid-column:1/-1;
+width:100%;
 background:linear-gradient(135deg,#C1121F,#E63946);
-color:white;
-}
-
-.live-btn strong,
-.live-btn small{
 color:white;
 }
 
 .footer-credit{
 text-align:center;
-padding:20px 20px 35px;
+padding:28px 20px 40px;
 font-size:14px;
 color:#6b7280;
 line-height:1.7;
+}
+
+/* ===== VISITOR COUNTER ===== */
+
+.visitor-section{
+padding:0 20px 24px;
+}
+
+.visitor-card{
+background:white;
+border-radius:22px;
+padding:18px 22px;
+display:flex;
+align-items:center;
+gap:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.visitor-icon{
+width:58px;
+height:58px;
+border-radius:50%;
+background:#EEF4FF;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+}
+
+.visitor-card h3{
+font-size:30px;
+color:var(--blue);
+margin:0;
+}
+
+.visitor-card p{
+margin:2px 0 0;
+color:#6b7280;
 }

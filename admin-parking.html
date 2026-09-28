@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manage Parking</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="hero small-hero">
+
+  <div class="top-bar">
+    <a href="admin.html" class="back-btn">← Admin</a>
+  </div>
+
+  <div class="hero-content">
+
+    <div class="logo-circle">
+      <img src="logo.png.png" alt="PCI Logo">
+    </div>
+
+    <h1>Manage Parking</h1>
+    <p>Admin Panel</p>
+
+  </div>
+
+</header>
+
+<section class="dashboard" style="padding-top:20px;">
+
+  <button class="menu-btn" id="initParkingBtn">
+    <span class="icon">📍</span>
+    <div>
+      <strong>Initialize Parking Layout</strong>
+      <small>Create Parking 1–10 & Reserve Parking</small>
+    </div>
+  </button>
+
+  <a href="admin-add-parking.html" class="menu-btn">
+    <span class="icon">➕</span>
+    <div>
+      <strong>Add Parking Area</strong>
+      <small>Create a new parking location</small>
+    </div>
+  </a>
+
+</section>
+
+<main id="parkingList"></main>
+
+<script type="module" src="admin-parking.js"></script>
+
+</body>
+</html>

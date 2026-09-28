@@ -14,6 +14,28 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// Automatic Mizo day names
+const mizoDays = [
+  "Pathianni",   // Sunday
+  "Thawhṭanni",  // Monday
+  "Thawhlehni",  // Tuesday
+  "Nilaini",     // Wednesday
+  "Ningani",     // Thursday
+  "Zirtawpni",   // Friday
+  "Inrinni"      // Saturday
+];
+
+function convertTime(time24){
+  if(!time24) return "";
+
+  let [h,m]=time24.split(":").map(Number);
+
+  const ap=h>=12?"PM":"AM";
+
+  h=h%12||12;
+
+  return `${h}:${String(m).padStart(2,"0")} ${ap}`;
+}
 const saveBtn = document.getElementById("saveProgramme");
 const statusMsg = document.getElementById("statusMsg");
 

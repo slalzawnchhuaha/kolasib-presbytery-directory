@@ -11,18 +11,15 @@
 
 <body>
 
-<header class="hero">
-  <div class="hero-content">
+const membersEl = document.getElementById("totalMembers");
+const villagesEl = document.getElementById("totalVillages");
+const churchesEl = document.getElementById("totalChurches");
 
-    <div class="logo-circle">
-      <img src="logo.png.png" alt="PCI Logo">
-    </div>
-
-    <h1>Palai Thlen In</h1>
-    <p>Kolasib Presbytery Directory</p>
-
-  </div>
-</header>
+if (membersEl) membersEl.textContent = contacts.length;
+if (villagesEl) villagesEl.textContent =
+  new Set(contacts.map(c => c.village).filter(Boolean)).size;
+if (churchesEl) churchesEl.textContent =
+  new Set(contacts.map(c => c.church).filter(Boolean)).size;
 
 <section class="search-section">
   <input id="q" placeholder="🔍 Search name, village, church or phone">

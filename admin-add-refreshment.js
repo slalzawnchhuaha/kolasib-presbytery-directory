@@ -44,10 +44,10 @@ photoInput.addEventListener("input", () => {
 saveBtn.addEventListener("click", async () => {
 
   const item = {
-    number: document.getElementById("counterNumber").value.trim(),
-    location: document.getElementById("location").value.trim(),
-    photo: ""
-  };
+  number: document.getElementById("counterNumber").value.trim(),
+  location: document.getElementById("location").value.trim(),
+  photo: document.getElementById("photo").value.trim()
+};
 
   if (!item.number || !item.location) {
     alert("Counter Number and Location are required.");

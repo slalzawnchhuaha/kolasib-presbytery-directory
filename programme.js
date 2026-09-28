@@ -5,6 +5,7 @@ import {
   onValue
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCSzp3WT1U8S-_1zlxP1xEE0sSX5ssrv-E",
   authDomain: "kolasib-presbytery-vawi-12-na.firebaseapp.com",
@@ -19,9 +20,19 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const container = document.getElementById("programmeContent");
+const dayButtons = document.querySelectorAll(".day-btn");
 
-function timeToMinutes(t) {
-  const m = (t || "").match(/(\d+):(\d+)\s*(AM|PM)/i);
+let programmeItems = [];
+let currentTab = "day1";
+
+const dateMap = {
+  day1: "2026-10-09",
+  day2: "2026-10-10",
+  day3: "2026-10-11"
+};
+
+function timeToMinutes(time) {
+  const m = (time || "").match(/(\d+):(\d+)\s*(AM|PM)/i);
   if (!m) return 0;
 
   let h = parseInt(m[1]);
@@ -34,43 +45,85 @@ function timeToMinutes(t) {
   return h * 60 + min;
 }
 
-onValue(ref(db, "programme"), (snap) => {
-
-  const data = snap.val() || {};
-
-  const items = Object.values(data).sort((a, b) => {
-    if ((a.date || "") !== (b.date || ""))
-      return (a.date || "").localeCompare(b.date || "");
-
-    return timeToMinutes(a.time) - timeToMinutes(b.time);
-  });
+function render() {
 
   container.innerHTML = "";
 
-  let currentDate = "";
+  if (currentTab === "agenda") {
+
+    container.innerHTML = `
+      <div class="programme-card">
+        <div class="details">
+          <h3>Agenda</h3>
+          <p>The agenda section will be added later.</p>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const selectedDate = dateMap[currentTab];
+
+  const items = programmeItems
+    .filter(i => i.date === selectedDate)
+    .sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
+
+  if (items.length === 0) {
+
+    container.innerHTML = `
+      <div class="programme-card">
+        <div class="details">
+          <h3>No programme yet</h3>
+          <p>Add items from the Admin Panel.</p>
+        </div>
+      </div>`;
+    return;
+  }
 
   items.forEach(item => {
 
-    if (item.date !== currentDate) {
-
-      currentDate = item.date;
-
-      container.innerHTML += `
-        <div class="day-divider">
-          <h2>${item.day}</h2>
-          <small>${item.date}</small>
-        </div>`;
-    }
-
     container.innerHTML += `
       <div class="programme-card">
+
         <div class="time">${item.time}</div>
+
         <div class="details">
+
           <h3>${item.title}</h3>
+
           ${item.speaker ? `<p>🎤 ${item.speaker}</p>` : ""}
+
           ${item.choir ? `<p>🎵 ${item.choir}</p>` : ""}
+
         </div>
+
       </div>`;
+  });
+}
+
+// Live updates from Firebase
+onValue(ref(db, "programme"), snap => {
+
+  const data = snap.val() || {};
+
+  programmeItems = Object.values(data);
+
+  render();
+
+});
+
+// Day tab switching
+dayButtons.forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    dayButtons.forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+
+    currentTab = btn.dataset.day;
+
+    render();
+
   });
 
 });

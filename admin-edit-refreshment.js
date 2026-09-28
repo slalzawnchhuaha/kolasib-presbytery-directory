@@ -38,14 +38,24 @@ async function loadCounter(){
   locationInput.value = data.location || "";
 }
 
+const photoInput = document.getElementById("photo");
+const preview = document.getElementById("photoPreview");
+
+photoInput.value = data.photo || "";
+
+if (data.photo) {
+  preview.src = `refreshment/${data.photo}`;
+  preview.style.display = "block";
+}
 loadCounter();
 
 document.getElementById("saveCounter").addEventListener("click", async ()=>{
 
-  await update(ref(db, "refreshment/" + counterId),{
-    number:numberInput.value.trim(),
-    location:locationInput.value.trim()
-  });
+  await update(ref(db,"refreshment/"+counterId),{
+  number:numberInput.value.trim(),
+  location:locationInput.value.trim(),
+  photo:photoInput.value.trim()
+});
 
   statusMsg.textContent="✅ Counter updated.";
   statusMsg.style.color="green";

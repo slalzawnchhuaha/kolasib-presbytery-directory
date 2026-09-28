@@ -11,16 +11,6 @@
 
 <body>
 
-const membersEl = document.getElementById("totalMembers");
-const villagesEl = document.getElementById("totalVillages");
-const churchesEl = document.getElementById("totalChurches");
-
-if (membersEl) membersEl.textContent = contacts.length;
-if (villagesEl) villagesEl.textContent =
-  new Set(contacts.map(c => c.village).filter(Boolean)).size;
-if (churchesEl) churchesEl.textContent =
-  new Set(contacts.map(c => c.church).filter(Boolean)).size;
-
 <section class="search-section">
   <input id="q" placeholder="🔍 Search name, village, church or phone">
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add Programme Item</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="hero small-hero">
+  <div class="top-bar">
+    <a href="admin-programme.html" class="back-btn">← Back</a>
+  </div>
+
+  <div class="hero-content">
+    <div class="logo-circle">
+      <img src="logo.png.png" alt="PCI Logo">
+    </div>
+    <h1>Add Programme Item</h1>
+    <p>Admin Panel</p>
+  </div>
+</header>
+
+<section class="programme-header">
+  <div class="theme-card">
+
+    <input id="date" class="admin-input" type="date">
+
+    <input id="day" class="admin-input" placeholder="Day (Friday, Saturday...)">
+
+    <input id="time" class="admin-input" placeholder="Time (6:30 PM)">
+
+    <input id="title" class="admin-input" placeholder="Programme Title">
+
+    <input id="speaker" class="admin-input" placeholder="Speaker (optional)">
+
+    <input id="choir" class="admin-input" placeholder="Choir (optional)">
+
+    <button id="saveProgramme" class="admin-btn">
+      Save Programme
+    </button>
+
+    <p id="statusMsg"></p>
+
+  </div>
+</section>
+
+<script type="module" src="admin-add-programme.js"></script>
+
+</body>
+</html>

@@ -121,26 +121,26 @@ allBtn.onclick = () => {
 
 // ===== Scroll to Top =====
 
-const scrollBtn = document.getElementById("scrollTopBtn");
+const scrollTopBtn = document.getElementById("scrollTopBtn");
 
-if (scrollBtn) {
+window.onscroll = function () {
+  if (!scrollTopBtn) return;
 
-  window.addEventListener("scroll", function () {
-    if (window.pageYOffset > 300) {
-      scrollBtn.classList.add("show");
-    } else {
-      scrollBtn.classList.remove("show");
-    }
-  });
+  if (
+    document.body.scrollTop > 300 ||
+    document.documentElement.scrollTop > 300
+  ) {
+    scrollTopBtn.style.display = "block";
+  } else {
+    scrollTopBtn.style.display = "none";
+  }
+};
 
-  scrollBtn.addEventListener("click", function () {
+if (scrollTopBtn) {
+  scrollTopBtn.onclick = function () {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
-  });
-
+  };
 }
-    list.innerHTML =
-      "<p style='text-align:center;padding:40px;'>Unable to load contacts.</p>";
-  });

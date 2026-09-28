@@ -23,21 +23,25 @@ const saveBtn = document.getElementById("saveCounter");
 const statusMsg = document.getElementById("statusMsg");
 
 const photoInput = document.getElementById("photo");
-const preview = document.getElementById("photoPreview");
+const choosePhoto = document.getElementById("choosePhoto");
+const photoPreview = document.getElementById("photoPreview");
+const photoStatus = document.getElementById("photoStatus");
 
-photoInput.addEventListener("input", () => {
+let selectedPhoto = null;
 
-  const file = photoInput.value.trim();
+choosePhoto.addEventListener("click", () => {
+  photoInput.click();
+});
 
-  if (!file) {
+photoInput.addEventListener("change", () => {
 
-    preview.style.display = "none";
+  selectedPhoto = photoInput.files[0];
 
-    return;
-  }
+  if (!selectedPhoto) return;
 
-  preview.src = `refreshment/${file}`;
-  preview.style.display = "block";
+  photoPreview.src = URL.createObjectURL(selectedPhoto);
+  photoPreview.style.display = "block";
+  photoStatus.textContent = selectedPhoto.name;
 
 });
 
@@ -46,7 +50,7 @@ saveBtn.addEventListener("click", async () => {
   const item = {
   number: document.getElementById("counterNumber").value.trim(),
   location: document.getElementById("location").value.trim(),
-  photo: document.getElementById("photo").value.trim()
+  photo: selectedPhoto ? selectedPhoto.name : ""
 };
 
   if (!item.number || !item.location) {

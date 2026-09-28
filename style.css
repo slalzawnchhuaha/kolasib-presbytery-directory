@@ -564,8 +564,8 @@ margin-top:12px;
 }
 
 .scroll-top-btn.show{
-  opacity:1;
-  visibility:visible;
+opacity:1;
+visibility:visible;
   transform:translateY(0);
 }
 

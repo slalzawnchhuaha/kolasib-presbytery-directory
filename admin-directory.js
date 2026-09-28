@@ -71,9 +71,9 @@ function render(){
 
         <div class="admin-actions">
 
-          <button class="edit-btn" data-id="${m.id}">
+          <a href="admin-edit-member.html?id=${m.id}" class="edit-btn">
             ✏️ Edit
-          </button>
+          </a>
 
           <button class="delete-btn" data-id="${m.id}">
             🗑️ Delete

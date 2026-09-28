@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit Parking</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="hero small-hero">
+
+<div class="top-bar">
+<a href="admin-parking.html" class="back-btn">← Back</a>
+</div>
+
+<div class="hero-content">
+
+<div class="logo-circle">
+<img src="logo.png.png" alt="PCI Logo">
+</div>
+
+<h1>Edit Parking</h1>
+<p>Admin Panel</p>
+
+</div>
+
+</header>
+
+<section class="programme-header">
+
+<div class="theme-card">
+
+<input id="name" class="admin-input" placeholder="Parking Name">
+
+<select id="type" class="admin-input">
+<option>2 Wheeler</option>
+<option>4 Wheeler</option>
+<option>2 & 4 Wheeler</option>
+</select>
+
+<input id="latitude" class="admin-input" placeholder="Latitude">
+
+<input id="longitude" class="admin-input" placeholder="Longitude">
+
+<button id="saveParking" class="admin-btn">
+Save Changes
+</button>
+
+<p id="statusMsg"></p>
+
+</div>
+
+</section>
+
+<script type="module" src="admin-edit-parking.js"></script>
+
+</body>
+</html>

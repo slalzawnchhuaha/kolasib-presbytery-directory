@@ -45,13 +45,16 @@ function render() {
 
   parkingAreas.forEach(p => {
 
-    const mapLink =
-      `https://www.google.com/maps?q=${p.latitude},${p.longitude}`;
+    const mapLink = `https://www.google.com/maps?q=${p.latitude},${p.longitude}`;
 
     list.innerHTML += `
       <div class="card">
 
+        <div class="avatar">🚗</div>
+
         <h3>${p.name}</h3>
+
+        <span class="badge">${p.type || "Parking"}</span>
 
         <p>📍 ${p.latitude}, ${p.longitude}</p>
 

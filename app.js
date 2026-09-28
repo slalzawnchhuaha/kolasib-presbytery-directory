@@ -63,11 +63,15 @@ fetch("https://kolasib-presbytery-vawi-12-na-default-rtdb.asia-southeast1.fireba
   .then(data => {
     contacts = Object.values(data || {});
 
-    document.getElementById("totalMembers").textContent = contacts.length;
-    document.getElementById("totalVillages").textContent =
-      new Set(contacts.map(c => c.village).filter(Boolean)).size;
-    document.getElementById("totalChurches").textContent =
-      new Set(contacts.map(c => c.church).filter(Boolean)).size;
+   const membersEl = document.getElementById("totalMembers");
+const villagesEl = document.getElementById("totalVillages");
+const churchesEl = document.getElementById("totalChurches");
+
+if (membersEl) membersEl.textContent = contacts.length;
+if (villagesEl) villagesEl.textContent =
+  new Set(contacts.map(c => c.village).filter(Boolean)).size;
+if (churchesEl) churchesEl.textContent =
+  new Set(contacts.map(c => c.church).filter(Boolean)).size;
 
     const villages = [...new Set(contacts.map(c => c.village).filter(Boolean))].sort();
 

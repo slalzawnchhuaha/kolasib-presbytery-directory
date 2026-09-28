@@ -40,10 +40,32 @@
 
     <div class="theme-card">
 
+  <div class="theme-card">
+
   <input
+    type="file"
     id="photo"
-    class="admin-input"
-    placeholder="Photo filename (e.g. counter1.jpg)">
+    accept="image/*"
+    capture="environment"
+    style="display:none;">
+
+  <button
+    type="button"
+    id="choosePhoto"
+    class="admin-btn"
+    style="margin-bottom:15px;">
+
+    📷 Choose Photo
+
+  </button>
+
+  <img
+    id="photoPreview"
+    style="display:none;width:100%;max-height:250px;border-radius:15px;object-fit:cover;">
+
+  <p id="photoStatus">No photo selected.</p>
+
+</div>
 
   <img
     id="photoPreview"

@@ -62,30 +62,28 @@ async function updateVisitorCounter() {
 }
 
 updateVisitorCounter();
-// ===== Secret Admin Access =====
+// ===== Secret Admin Access (PC + Mobile) =====
 
 const adminLogo = document.getElementById("adminLogo");
 
 if (adminLogo) {
+  let pressTimer = null;
 
-  let pressTimer;
-
-  adminLogo.addEventListener("mousedown", () => {
+  const startPress = (e) => {
+    e.preventDefault();
+    clearTimeout(pressTimer);
     pressTimer = setTimeout(() => {
       window.location.href = "admin-login.html";
     }, 5000);
-  });
+  };
 
-  adminLogo.addEventListener("mouseup", () => clearTimeout(pressTimer));
-  adminLogo.addEventListener("mouseleave", () => clearTimeout(pressTimer));
+  const cancelPress = () => {
+    clearTimeout(pressTimer);
+  };
 
-  // Mobile support
-  adminLogo.addEventListener("touchstart", () => {
-    pressTimer = setTimeout(() => {
-      window.location.href = "admin-login.html";
-    }, 5000);
-  });
-
-  adminLogo.addEventListener("touchend", () => clearTimeout(pressTimer));
-
+  adminLogo.addEventListener("pointerdown", startPress);
+  adminLogo.addEventListener("pointerup", cancelPress);
+  adminLogo.addEventListener("pointerleave", cancelPress);
+  adminLogo.addEventListener("pointercancel", cancelPress);
+  adminLogo.addEventListener("contextmenu", (e) => e.preventDefault());
 }

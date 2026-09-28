@@ -1,12 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-  get,
-  remove
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyCSzp3WT1U8S-_1zlxP1xEE0sSX5ssrv-E",
   authDomain: "kolasib-presbytery-vawi-12-na.firebaseapp.com",
@@ -20,109 +14,37 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const list = document.getElementById("programmeList");
-const search = document.getElementById("programmeSearch");
+const saveBtn = document.getElementById("saveProgramme");
+const statusMsg = document.getElementById("statusMsg");
 
-let items = [];
+saveBtn.addEventListener("click", async () => {
+  const item = {
+    date: document.getElementById("date").value,
+    day: document.getElementById("day").value.trim(),
+    time: document.getElementById("time").value.trim(),
+    title: document.getElementById("title").value.trim(),
+    speaker: document.getElementById("speaker").value.trim(),
+    choir: document.getElementById("choir").value.trim()
+  };
 
-function timeToMinutes(t){
-  if(!t) return 0;
-
-  const m=t.match(/(\d+):(\d+)\s*(AM|PM)/i);
-  if(!m) return 0;
-
-  let h=parseInt(m[1]);
-  const min=parseInt(m[2]);
-  const ampm=m[3].toUpperCase();
-
-  if(ampm==="PM" && h!==12) h+=12;
-  if(ampm==="AM" && h===12) h=0;
-
-  return h*60+min;
-}
-
-async function loadProgramme(){
-
-  const snap=await get(ref(db,"programme"));
-
-  const data=snap.val()||{};
-
-  items=Object.entries(data).map(([id,value])=>({
-    id,
-    ...value
-  }));
-
-  // Sort by Date then Time
-  items.sort((a,b)=>{
-
-    if(a.date!==b.date)
-      return (a.date||"").localeCompare(b.date||"");
-
-    return timeToMinutes(a.time)-timeToMinutes(b.time);
-
-  });
-
-  render();
-}
-
-function render(){
-
-  const q=search.value.toLowerCase();
-
-  list.innerHTML="";
-
-  items
-    .filter(i=>
-      (i.title||"").toLowerCase().includes(q) ||
-      (i.day||"").toLowerCase().includes(q) ||
-      (i.time||"").toLowerCase().includes(q)
-    )
-    .forEach(i=>{
-
-      list.innerHTML+=`
-      <div class="card">
-
-        <h3>${i.title||"Programme Item"}</h3>
-
-        <p>📅 ${i.day||""} (${i.date||""})</p>
-
-        <p>🕒 ${i.time||""}</p>
-
-        <p>🎤 ${i.speaker||"-"}</p>
-
-        <p>🎵 ${i.choir||"-"}</p>
-
-        <div class="admin-actions">
-
-          <a href="admin-edit-programme.html?id=${i.id}" class="edit-btn">
-            ✏️ Edit
-          </a>
-
-          <button class="delete-btn" data-id="${i.id}">
-            🗑️ Delete
-          </button>
-
-        </div>
-
-      </div>`;
-    });
-}
-
-search.addEventListener("input",render);
-
-// Delete Programme Item
-list.addEventListener("click",async e=>{
-
-  if(!e.target.classList.contains("delete-btn")) return;
-
-  if(confirm("Delete this programme item?")){
-
-    await remove(ref(db,"programme/"+e.target.dataset.id));
-
-    loadProgramme();
-
+  if (!item.title || !item.time) {
+    alert("Programme Title and Time are required.");
+    return;
   }
 
-});
+  try {
+    await push(ref(db, "programme"), item);
 
-loadProgramme();
+    statusMsg.textContent = "✅ Programme saved successfully.";
+    statusMsg.style.color = "green";
+
+    setTimeout(() => {
+      window.location.href = "admin-programme.html";
+    }, 1000);
+
+  } catch (err) {
+    console.error(err);
+    statusMsg.textContent = "❌ Failed to save programme.";
+    statusMsg.style.color = "red";
+  }
+});

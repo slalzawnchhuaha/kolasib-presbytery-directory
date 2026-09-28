@@ -39,11 +39,20 @@ function convertTime(time24){
 const saveBtn = document.getElementById("saveProgramme");
 const statusMsg = document.getElementById("statusMsg");
 
+const dateInput = document.getElementById("date");
+const dayInput = document.getElementById("day");
+
+// Automatically fill Mizo day from selected date
+dateInput.addEventListener("change", () => {
+  const d = new Date(dateInput.value);
+  dayInput.value = mizoDays[d.getDay()] || "";
+});
+
 saveBtn.addEventListener("click", async () => {
   const item = {
     date: document.getElementById("date").value,
     day: document.getElementById("day").value.trim(),
-    time: document.getElementById("time").value.trim(),
+    time: convertTime(document.getElementById("time").value),
     title: document.getElementById("title").value.trim(),
     speaker: document.getElementById("speaker").value.trim(),
     choir: document.getElementById("choir").value.trim()

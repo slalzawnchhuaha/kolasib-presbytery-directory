@@ -778,6 +778,11 @@ cursor:pointer;
 .edit-btn{
 background:#EEF4FF;
 color:var(--blue);
+text-decoration:none;
+text-align:center;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .delete-btn{

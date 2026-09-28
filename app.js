@@ -117,7 +117,10 @@ allBtn.onclick = () => {
     render();
   })
   .catch(err => {
-    console.error(err);
+  console.error(err);
+  list.innerHTML =
+    "<p style='text-align:center;padding:40px;'>Unable to load contacts.</p>";
+});
 
 // ===== Scroll to Top =====
 

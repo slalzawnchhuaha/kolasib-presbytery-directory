@@ -258,3 +258,69 @@ color:white;
 .chip:hover{
 transform:translateY(-2px);
 }
+
+/* ===== HOME DASHBOARD ===== */
+
+.dashboard{
+padding:24px 20px 30px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
+}
+
+.menu-btn{
+background:white;
+border:none;
+border-radius:22px;
+padding:22px 18px;
+display:flex;
+align-items:center;
+gap:15px;
+cursor:pointer;
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+transition:.25s;
+text-align:left;
+}
+
+.menu-btn:hover{
+transform:translateY(-5px);
+box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+.menu-btn .icon{
+font-size:30px;
+width:46px;
+text-align:center;
+}
+
+.menu-btn strong{
+display:block;
+font-size:16px;
+color:var(--blue);
+margin-bottom:4px;
+}
+
+.menu-btn small{
+display:block;
+font-size:13px;
+color:#6b7280;
+}
+
+.live-btn{
+grid-column:1/-1;
+background:linear-gradient(135deg,#C1121F,#E63946);
+color:white;
+}
+
+.live-btn strong,
+.live-btn small{
+color:white;
+}
+
+.footer-credit{
+text-align:center;
+padding:20px 20px 35px;
+font-size:14px;
+color:#6b7280;
+line-height:1.7;
+}

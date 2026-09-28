@@ -1,6 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
 // Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyCSzp3WT1U8S-_1zlxP1xEE0sSX5ssrv-E",
@@ -12,13 +9,13 @@ const firebaseConfig = {
   appId: "1:515741204477:web:995e01bfffdb1c553a2394"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+firebase.initializeApp(firebaseConfig);
 
+const db = firebase.database();
 const container = document.getElementById("refreshmentCards");
 
-async function loadCounters() {
-  const snap = await get(ref(db, "refreshment"));
+firebase.database().ref("refreshment").once("value").then((snap) => {
+
   const data = snap.val() || {};
 
   const counters = Object.entries(data)
@@ -45,6 +42,5 @@ async function loadCounters() {
       </div>
     `;
   });
-}
 
-loadCounters();
+});

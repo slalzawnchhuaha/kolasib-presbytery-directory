@@ -1,149 +1,76 @@
-const programme = {
-  day1: [
-    { time: "06:00", end: "08:00", display: "06:00–08:00 AM", title: "Upa Exam" },
-    { time: "09:00", end: "10:30", display: "09:00–10:30 AM", title: "Standing Committee" },
-    { time: "11:00", end: "13:00", display: "11:00 AM–01:00 PM", title: "Sub-Pastoral Committee" },
-    { time: "13:30", end: "16:30", display: "01:30–04:30 PM", title: "Nomination Committee" },
-    {
-      time: "18:30",
-      end: "20:30",
-      display: "06:30 PM",
-      title: "Pathian Biak Inkhawm (Inlawmna & Report)",
-      details: "Tantu: Upa H. Lalthana • Zaipawl: Diakkawn, Vengthar, Ṭumpui Bial"
-    }
-  ],
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  onValue
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  day2: [
-    { time: "09:30", end: "16:00", display: "09:30 AM–04:00 PM", title: "Inkhawmpui Rorel" },
-    {
-      time: "18:30",
-      end: "20:30",
-      display: "06:30 PM",
-      title: "Pathian Biak Inkhawm",
-      details: "Sawitu: Pastor Lalhruaitluanga Ralte • Zaipawl: Venglai, Hmarveng, Rengtekawn"
-    }
-  ],
-
-  day3: [
-    {
-      time: "10:00",
-      end: "12:00",
-      display: "10:00 AM",
-      title: "Upa Nemngheh Inkhawm",
-      details: "Fuihna & Ṭawngṭaisakna: Upa Sangkhuma Pautu"
-    },
-    {
-      time: "13:00",
-      end: "15:00",
-      display: "01:00 PM",
-      title: "Lalpa Zanriah Sacrament",
-      details: "Thehtu: Pastor B. Darnghakliana"
-    },
-    {
-      time: "18:30",
-      end: "20:30",
-      display: "06:30 PM",
-      title: "Valedictory Sermon",
-      details: "Sawitu: Upa Lalduhawma Ralte (Moderator)"
-    }
-  ],
-
-  agenda: [
-    { title: "I. Inkhawmpui Hawnna" },
-    { title: "II. Nomination Thu" },
-    { title: "III. Sub-Pastoral Thu" },
-    { title: "IV. Standing Committee Thu" },
-    { title: "V. General" },
-    { title: "VI. Committee Member leh Palai Ruatna" },
-    { title: "VII. Statistician Report" },
-    { title: "VIII. Lehkha Thawn Ngaite" },
-    { title: "IX. Minute Chhiar leh Pawmna" },
-    { title: "X. Rorel Kharna" }
-  ]
+const firebaseConfig = {
+  apiKey: "AIzaSyCSzp3WT1U8S-_1zlxP1xEE0sSX5ssrv-E",
+  authDomain: "kolasib-presbytery-vawi-12-na.firebaseapp.com",
+  databaseURL: "https://kolasib-presbytery-vawi-12-na-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "kolasib-presbytery-vawi-12-na",
+  storageBucket: "kolasib-presbytery-vawi-12-na.firebasestorage.app",
+  messagingSenderId: "515741204477",
+  appId: "1:515741204477:web:995e01bfffdb1c553a2394"
 };
 
-const container = document.getElementById("programmeContent");
-const buttons = document.querySelectorAll(".day-btn");
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-function todayTab() {
-  const now = new Date();
-  const d = now.getDate();
+const container = document.getElementById("programmeList");
 
-  if (d === 9) return "day1";
-  if (d === 10) return "day2";
-  if (d === 11) return "day3";
+function timeToMinutes(t) {
+  const m = (t || "").match(/(\d+):(\d+)\s*(AM|PM)/i);
+  if (!m) return 0;
 
-  return "day1";
+  let h = parseInt(m[1]);
+  const min = parseInt(m[2]);
+  const ap = m[3].toUpperCase();
+
+  if (ap === "PM" && h !== 12) h += 12;
+  if (ap === "AM" && h === 12) h = 0;
+
+  return h * 60 + min;
 }
 
-function currentMinutes() {
-  const now = new Date();
-  return now.getHours() * 60 + now.getMinutes();
-}
+onValue(ref(db, "programme"), (snap) => {
 
-function toMinutes(str) {
-  const [h, m] = str.split(":").map(Number);
-  return h * 60 + m;
-}
+  const data = snap.val() || {};
 
-function render(day) {
+  const items = Object.values(data).sort((a, b) => {
+    if ((a.date || "") !== (b.date || ""))
+      return (a.date || "").localeCompare(b.date || "");
+
+    return timeToMinutes(a.time) - timeToMinutes(b.time);
+  });
 
   container.innerHTML = "";
 
-  const now = currentMinutes();
-  const activeDay = todayTab();
+  let currentDate = "";
 
-  programme[day].forEach(item => {
+  items.forEach(item => {
 
-    let badge = "";
+    if (item.date !== currentDate) {
 
-    if (day === activeDay && item.time) {
+      currentDate = item.date;
 
-      const start = toMinutes(item.time);
-      const end = toMinutes(item.end);
-
-      if (now >= start && now <= end) {
-        badge = '<span class="now-live">LIVE NOW</span>';
-      } else if (now < start) {
-        const diff = start - now;
-        const hrs = Math.floor(diff / 60);
-        const mins = diff % 60;
-
-        badge = `<span class="countdown">Starts in ${hrs ? hrs + "h " : ""}${mins}m</span>`;
-      }
-
+      container.innerHTML += `
+        <div class="day-divider">
+          <h2>${item.day}</h2>
+          <small>${item.date}</small>
+        </div>`;
     }
 
     container.innerHTML += `
       <div class="programme-card">
-        ${item.display ? `<div class="programme-time">${item.display}</div>` : ""}
-        <h3>${item.title}${badge}</h3>
-        ${item.details ? `<p>${item.details}</p>` : ""}
+        <div class="time">${item.time}</div>
+        <div class="details">
+          <h3>${item.title}</h3>
+          ${item.speaker ? `<p>🎤 ${item.speaker}</p>` : ""}
+          ${item.choir ? `<p>🎵 ${item.choir}</p>` : ""}
+        </div>
       </div>`;
   });
-}
-
-buttons.forEach(btn => {
-
-  btn.onclick = () => {
-
-    buttons.forEach(b => b.classList.remove("active"));
-
-    btn.classList.add("active");
-
-    render(btn.dataset.day);
-
-  };
 
 });
-
-const defaultDay = todayTab();
-
-buttons.forEach(b => {
-  if (b.dataset.day === defaultDay)
-    b.classList.add("active");
-  else
-    b.classList.remove("active");
-});
-
-render(defaultDay);

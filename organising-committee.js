@@ -96,21 +96,19 @@ showPhoto();
 }
 });
 
-shareBtn.onclick=async()=>{
+if (shareBtn) {
+  shareBtn.onclick = async () => {
 
-const src=`organising-committee/${photos[currentIndex]}`;
+    const src = `organising-committee/${photos[currentIndex]}`;
 
-if(navigator.share){
-
-await navigator.share({
-title:"Organising Committee, Tumpui Kohhran",
-url:new URL(src,location.href).href
-});
-
-}else{
-
-navigator.clipboard.writeText(new URL(src,location.href).href);
-alert("Photo link copied.");
-
+    if (navigator.share) {
+      await navigator.share({
+        title: "Organising Committee, Tumpui Kohhran",
+        url: new URL(src, location.href).href
+      });
+    } else {
+      navigator.clipboard.writeText(new URL(src, location.href).href);
+      alert("Photo link copied.");
+    }
+  };
 }
-};

@@ -7,12 +7,16 @@ const photos = [
 ];
 
 const gallery = document.getElementById("committeeGallery");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
 
 photos.forEach(photo => {
   gallery.innerHTML += `
-    <div class="gallery-card">
-      <img src="organising-committee/${photo}"
-           alt="Organising Committee Photo">
-    </div>
-  `;
+  <div class="gallery-card">
+    <img src="organising-committee/${photo}"
+         alt="Organising Committee Photo"
+         loading="lazy"
+         data-src="organising-committee/${photo}">
+  </div>
+`;
 });

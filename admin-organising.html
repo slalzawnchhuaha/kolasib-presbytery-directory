@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Organising Committee Upload</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="hero small-hero">
+
+  <div class="top-bar">
+    <a href="admin.html" class="back-btn">← Admin</a>
+  </div>
+
+  <div class="hero-content">
+    <div class="logo-circle">
+      <img src="logo.png.png" alt="PCI Logo">
+    </div>
+
+    <h1>Organising Committee</h1>
+    <p>Tumpui Kohhran</p>
+  </div>
+
+</header>
+
+<section class="programme-header">
+  <div class="theme-card">
+
+    <input
+      type="file"
+      id="photos"
+      multiple
+      accept="image/*"
+      style="display:none;">
+
+    <label for="photos" class="admin-btn"
+      style="display:block;text-align:center;cursor:pointer;">
+      📸 Choose Photos
+    </label>
+
+    <p id="photoCount">No photos selected.</p>
+
+    <button id="uploadBtn" class="admin-btn">
+      Upload Photos
+    </button>
+
+    <p id="statusMsg"></p>
+
+  </div>
+</section>
+
+<script type="module" src="admin-organising.js"></script>
+
+</body>
+</html>

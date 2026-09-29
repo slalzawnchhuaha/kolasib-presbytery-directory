@@ -11,7 +11,7 @@ let startX=0;
 
 async function loadGallery(){
 
-const response=await fetch("organising-committee/photos.json");
+const response = await fetch("./organising-committee/photos.json");
 photos=await response.json();
 
 gallery.innerHTML="";
@@ -21,7 +21,7 @@ photos.forEach((photo,index)=>{
 gallery.innerHTML+=`
 <div class="gallery-card">
 <img
-src="organising-committee/${photo}"
+src="./organising-committee/${photo}"
 data-index="${index}"
 loading="lazy">
 </div>`;
@@ -32,7 +32,7 @@ loadGallery();
 
 function showPhoto(){
 
-const src=`organising-committee/${photos[currentIndex]}`;
+const src = `./organising-committee/${photos[currentIndex]}`;
 
 lightboxImg.src=src;
 downloadBtn.href=src;

@@ -31,7 +31,6 @@ async function loadGallery() {
 
 loadGallery();
 
-// Open photo
 gallery.addEventListener("click", (e) => {
   if (e.target.tagName !== "IMG") return;
 
@@ -40,28 +39,51 @@ gallery.addEventListener("click", (e) => {
 });
 
 function showPhoto() {
-  lightboxImg.src = `organising-committee/${photos[currentIndex]}`;
   lightbox.style.display = "flex";
+  lightboxImg.src = `organising-committee/${photos[currentIndex]}`;
 }
 
-// Close
 lightbox.addEventListener("click", (e) => {
   if (e.target === lightbox || e.target.classList.contains("close-lightbox")) {
     lightbox.style.display = "none";
   }
 });
 
-// Keyboard support
+// Keyboard navigation
 document.addEventListener("keydown", (e) => {
   if (lightbox.style.display !== "flex") return;
 
   if (e.key === "Escape") lightbox.style.display = "none";
+
   if (e.key === "ArrowRight") {
     currentIndex = (currentIndex + 1) % photos.length;
     showPhoto();
   }
+
   if (e.key === "ArrowLeft") {
     currentIndex = (currentIndex - 1 + photos.length) % photos.length;
     showPhoto();
   }
+});
+
+// Mobile swipe support
+let startX = 0;
+
+lightbox.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+lightbox.addEventListener("touchend", (e) => {
+  const endX = e.changedTouches[0].clientX;
+  const diff = endX - startX;
+
+  if (Math.abs(diff) < 50) return;
+
+  if (diff < 0) {
+    currentIndex = (currentIndex + 1) % photos.length;
+  } else {
+    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+  }
+
+  showPhoto();
 });

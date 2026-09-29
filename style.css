@@ -943,3 +943,79 @@ color:white;
 cursor:pointer;
 font-weight:300;
 }
+
+/* ===== Premium Lightbox ===== */
+
+.lightbox{
+animation:fadeIn .25s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+.lightbox-top{
+position:absolute;
+top:18px;
+left:18px;
+right:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+z-index:10001;
+}
+
+#photoCounter{
+font-weight:600;
+font-size:16px;
+background:rgba(0,0,0,.35);
+padding:8px 14px;
+border-radius:999px;
+backdrop-filter:blur(10px);
+}
+
+.lightbox-actions{
+display:flex;
+gap:10px;
+}
+
+.lightbox-actions button,
+.lightbox-actions a{
+border:none;
+background:rgba(255,255,255,.18);
+color:white;
+padding:10px 12px;
+border-radius:999px;
+cursor:pointer;
+text-decoration:none;
+font-size:18px;
+backdrop-filter:blur(10px);
+}
+
+.nav-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:52px;
+height:52px;
+border:none;
+border-radius:50%;
+background:rgba(255,255,255,.18);
+color:white;
+font-size:26px;
+cursor:pointer;
+backdrop-filter:blur(10px);
+}
+
+.prev-btn{left:18px;}
+.next-btn{right:18px;}
+
+@media(max-width:768px){
+.nav-btn{
+width:44px;
+height:44px;
+font-size:22px;
+}
+}

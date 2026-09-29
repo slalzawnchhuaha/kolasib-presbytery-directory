@@ -2,20 +2,23 @@ const gallery = document.getElementById("committeeGallery");
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
 
+let photos = [];
+let currentIndex = 0;
+
 async function loadGallery() {
   try {
     const response = await fetch("organising-committee/photos.json");
-    const photos = await response.json();
+    photos = await response.json();
 
     gallery.innerHTML = "";
 
-    photos.forEach(photo => {
+    photos.forEach((photo, index) => {
       gallery.innerHTML += `
         <div class="gallery-card">
           <img src="organising-committee/${photo}"
                alt="Organising Committee Photo"
                loading="lazy"
-               data-src="organising-committee/${photo}">
+               data-index="${index}">
         </div>
       `;
     });
@@ -28,17 +31,37 @@ async function loadGallery() {
 
 loadGallery();
 
-// Open photo in full-screen
+// Open photo
 gallery.addEventListener("click", (e) => {
   if (e.target.tagName !== "IMG") return;
 
-  lightbox.style.display = "flex";
-  lightboxImg.src = e.target.dataset.src;
+  currentIndex = Number(e.target.dataset.index);
+  showPhoto();
 });
 
-// Close full-screen viewer
+function showPhoto() {
+  lightboxImg.src = `organising-committee/${photos[currentIndex]}`;
+  lightbox.style.display = "flex";
+}
+
+// Close
 lightbox.addEventListener("click", (e) => {
   if (e.target === lightbox || e.target.classList.contains("close-lightbox")) {
     lightbox.style.display = "none";
+  }
+});
+
+// Keyboard support
+document.addEventListener("keydown", (e) => {
+  if (lightbox.style.display !== "flex") return;
+
+  if (e.key === "Escape") lightbox.style.display = "none";
+  if (e.key === "ArrowRight") {
+    currentIndex = (currentIndex + 1) % photos.length;
+    showPhoto();
+  }
+  if (e.key === "ArrowLeft") {
+    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+    showPhoto();
   }
 });

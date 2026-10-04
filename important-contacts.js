@@ -31,18 +31,18 @@ onValue(contactsRef, (snapshot) => {
         contactsList.innerHTML += `
             <div class="contact-card">
 
-                <h2>${contact.name}</h2>
+                <h2>${contact.Name}</h2>
 
-                <p class="contact-designation">
+                <p class="contact-Designation">
                     ${contact.designation}
                 </p>
 
-                <div class="contact-phone">
+                <div class="contact-Phone">
                     📞 ${contact.phone}
                 </div>
 
                 <a
-                    href="tel:${contact.phone}"
+                    href="tel:${contact.Phone}"
                     class="call-btn"
                 >
                     📞 CALL

@@ -17,8 +17,10 @@ const db = getDatabase(app);
 const contactsList = document.getElementById("contactsList");
 
 const contactsRef = ref(db, "important Contacts");
+console.log("CONTACTS PATH:", contactsRef.toString());
 
 onValue(contactsRef, (snapshot) => {
+    console.log("FIREBASE DATA:", snapshot.val());
 
     const data = snapshot.val() || {};
 

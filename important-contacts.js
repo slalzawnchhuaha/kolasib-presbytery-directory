@@ -1,5 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import {
+    getDatabase,
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCSzp3WT1U8S-_1zlxP1xEE0sSX5ssrv-E",
@@ -16,53 +20,70 @@ const db = getDatabase(app);
 
 const contactsList = document.getElementById("contactsList");
 
-const contactsRef = ref(db, "important Contacts");
+/* Firebase path */
+const contactsRef = ref(db, "important contacts");
+
 console.log("CONTACTS PATH:", contactsRef.toString());
 
-onValue(contactsRef, (snapshot) => {
-    console.log("FIREBASE DATA:", snapshot.val());
+onValue(
+    contactsRef,
+    (snapshot) => {
 
-    const data = snapshot.val() || {};
+        console.log("FIREBASE DATA:", snapshot.val());
 
-    contactsList.innerHTML = "";
+        const data = snapshot.val() || {};
 
-    const contacts = Object.values(data);
+        contactsList.innerHTML = "";
 
-    contacts.forEach(contact => {
+        const contacts = Object.values(data);
 
-        contactsList.innerHTML += `
-            <div class="contact-card">
+        contacts.forEach(contact => {
 
-                <h2>${contact.Name}</h2>
+            contactsList.innerHTML += `
+                <div class="contact-card">
 
-                <p class="contact-Designation">
-                    ${contact.designation}
-                </p>
+                    <h2>${contact.Name}</h2>
 
-                <div class="contact-Phone">
-                    📞 ${contact.phone}
+                    <p class="contact-designation">
+                        ${contact.Designation}
+                    </p>
+
+                    <div class="contact-phone">
+                        📞 ${contact.Phone}
+                    </div>
+
+                    <a
+                        href="tel:${contact.Phone}"
+                        class="call-btn"
+                    >
+                        📞 CALL
+                    </a>
+
                 </div>
+            `;
 
-                <a
-                    href="tel:${contact.Phone}"
-                    class="call-btn"
-                >
-                    📞 CALL
-                </a>
+        });
 
-            </div>
-        `;
+        if (contacts.length === 0) {
 
-    });
+            contactsList.innerHTML = `
+                <div class="theme-card">
+                    <p>No important contacts have been added yet.</p>
+                </div>
+            `;
 
-    if (contacts.length === 0) {
+        }
+
+    },
+    (error) => {
+
+        console.error("FIREBASE ERROR:", error);
 
         contactsList.innerHTML = `
             <div class="theme-card">
-                <p>No important contacts have been added yet.</p>
+                <p>Unable to load important contacts.</p>
             </div>
         `;
 
     }
-
-});
+);

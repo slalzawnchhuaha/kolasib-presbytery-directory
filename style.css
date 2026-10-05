@@ -1040,3 +1040,128 @@ border:none;
 cursor:pointer;
 font:inherit;
 }
+
+/* =========================================
+   IMPORTANT CONTACTS
+   ========================================= */
+
+.contacts-list {
+    width: min(1100px, 92%);
+    margin: 25px auto 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.contact-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px 22px;
+    border: 1px solid rgba(20, 70, 150, 0.10);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        #174ea6,
+        #d4af37
+    );
+}
+
+.contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.contact-card h2 {
+    margin: 0 0 8px;
+    padding-left: 8px;
+    font-size: 21px;
+    line-height: 1.3;
+    color: #173b7a;
+    font-weight: 700;
+}
+
+.contact-designation {
+    margin: 0 0 18px;
+    padding-left: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.contact-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 8px;
+    margin-bottom: 18px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+}
+
+.call-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    min-height: 46px;
+    background: #174ea6;
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.call-btn:hover {
+    background: #123d82;
+    transform: translateY(-1px);
+}
+
+.call-btn:active {
+    transform: translateY(0);
+}
+
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .contacts-list {
+        width: 92%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 20px;
+    }
+
+    .contact-card {
+        padding: 20px 18px;
+        border-radius: 18px;
+    }
+
+    .contact-card h2 {
+        font-size: 20px;
+    }
+
+    .contact-designation {
+        font-size: 14px;
+    }
+
+    .contact-phone {
+        font-size: 16px;
+    }
+
+}

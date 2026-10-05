@@ -60,25 +60,43 @@ onValue(contactsRef, (snapshot) => {
 
         contactsList.innerHTML += `
 
-            <div class="admin-contact-item">
+    <div class="admin-contact-item">
 
-                <div>
+        <div>
 
-                    <h3>${contact.Name}</h3>
+            <h3>${contact.Name}</h3>
 
-                    <p>
-                        ${contact.Designation}
-                    </p>
+            <p>
+                ${contact.Designation}
+            </p>
 
-                    <strong>
-                        📞 ${contact.Phone}
-                    </strong>
+            <strong>
+                📞 ${contact.Phone}
+            </strong>
 
-                </div>
+        </div>
 
-            </div>
+        <div class="admin-contact-actions">
 
-        `;
+            <button
+                class="edit-contact-btn"
+                data-id="${id}"
+            >
+                ✏️ Edit
+            </button>
+
+            <button
+                class="delete-contact-btn"
+                data-id="${id}"
+            >
+                🗑️ Delete
+            </button>
+
+        </div>
+
+    </div>
+
+`;
 
     });
 

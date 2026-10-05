@@ -16,7 +16,7 @@ const db = getDatabase(app);
 
 const contactsList = document.getElementById("contactsList");
 
-const contactsRef = ref(db, "importantContacts");
+const contactsRef = ref(db, "important Contacts");
 
 onValue(contactsRef, (snapshot) => {
 

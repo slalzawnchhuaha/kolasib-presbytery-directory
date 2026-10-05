@@ -1,9 +1,9 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
     getDatabase,
     ref,
     push,
-    onValue
+    onValue,
+    remove
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
@@ -167,5 +167,43 @@ saveBtn.addEventListener("click", async () => {
     saveBtn.disabled = false;
 
     saveBtn.textContent = "💾 Save Contact";
+
+});
+
+/* =========================================
+   DELETE CONTACT
+========================================= */
+
+document.addEventListener("click", async (event) => {
+
+    if (!event.target.classList.contains("delete-contact-btn")) {
+        return;
+    }
+
+    const id = event.target.dataset.id;
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this contact?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        await remove(
+            ref(db, `important contacts/${id}`)
+        );
+
+        alert("Contact deleted successfully.");
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Unable to delete contact.");
+
+    }
 
 });

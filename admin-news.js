@@ -153,15 +153,15 @@ async function uploadPhotos() {
     }
 
 
-    return {
+   return {
 
-        photo1:
-            result.photos[0]?.url || "",
+    photo1:
+        result.photos.photo1?.url || "",
 
-        photo2:
-            result.photos[1]?.url || ""
+    photo2:
+        result.photos.photo2?.url || ""
 
-    };
+};
 
 }
 

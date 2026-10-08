@@ -3,7 +3,8 @@ import {
   getDatabase,
   ref,
   get,
-  runTransaction
+  runTransaction,
+  onValue
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 // Firebase configuration

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - News</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="hero small-hero">
+
+    <div class="top-bar">
+        <a href="admin.html" class="back-btn">← Admin Dashboard</a>
+    </div>
+
+    <div class="hero-content">
+
+        <div class="logo-circle">
+            <img src="logo.png.png" alt="PCI Logo">
+        </div>
+
+        <h1>News</h1>
+        <p>Manage Presbytery News</p>
+
+    </div>
+
+</header>
+
+
+<main class="admin-container">
+
+    <!-- INTRO -->
+
+    <div class="theme-card">
+
+        <h2>📰 News Management</h2>
+
+        <p>
+            Add and manage news, announcements and important updates.
+        </p>
+
+    </div>
+
+
+    <!-- ADD NEWS -->
+
+    <div class="admin-form-card">
+
+        <h2>➕ Add News</h2>
+
+
+        <div class="form-group">
+
+            <label for="newsTitle">
+                Headline
+            </label>
+
+            <input
+                type="text"
+                id="newsTitle"
+                placeholder="Enter news headline"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="newsDate">
+                Date
+            </label>
+
+            <input
+                type="date"
+                id="newsDate"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="newsContent">
+                News / Announcement
+            </label>
+
+            <textarea
+                id="newsContent"
+                rows="6"
+                placeholder="Write the news or announcement..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- PHOTO 1 -->
+
+        <div class="form-group">
+
+            <label for="newsPhoto1">
+                Photo 1 <span>(Optional)</span>
+            </label>
+
+            <input
+                type="file"
+                id="newsPhoto1"
+                accept="image/*"
+            >
+
+        </div>
+
+
+        <!-- PHOTO 2 -->
+
+        <div class="form-group">
+
+            <label for="newsPhoto2">
+                Photo 2 <span>(Optional)</span>
+            </label>
+
+            <input
+                type="file"
+                id="newsPhoto2"
+                accept="image/*"
+            >
+
+        </div>
+
+
+        <!-- IMPORTANT NEWS -->
+
+        <div class="news-important-option">
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="newsImportant"
+                >
+
+                <span>
+                    ⭐ Mark as Important News
+                </span>
+
+            </label>
+
+        </div>
+
+
+        <button
+            id="saveNews"
+            class="admin-save-btn"
+        >
+            💾 Publish News
+        </button>
+
+
+        <p id="statusMsg"></p>
+
+    </div>
+
+
+    <!-- EXISTING NEWS -->
+
+    <div class="admin-form-card">
+
+        <h2>📋 Existing News</h2>
+
+        <div id="newsList">
+            Loading news...
+        </div>
+
+    </div>
+
+</main>
+
+
+<script type="module" src="admin-news.js"></script>
+
+</body>
+
+</html>

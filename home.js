@@ -98,3 +98,131 @@ if (btnLive) {
     window.location.href = "live.html";
   });
 }
+
+/* =========================================
+   HOME PAGE NEWS
+   ========================================= */
+
+const homeNewsList = document.getElementById("homeNewsList");
+
+if (homeNewsList) {
+
+    const newsRef = ref(db, "news");
+
+    onValue(newsRef, (snapshot) => {
+
+        const data = snapshot.val() || {};
+
+        homeNewsList.innerHTML = "";
+
+        let newsItems = Object.entries(data);
+
+        /* Newest first */
+        newsItems.sort((a, b) => {
+            const dateA = a[1].CreatedAt || 0;
+            const dateB = b[1].CreatedAt || 0;
+
+            return dateB - dateA;
+        });
+
+        /* Show latest 3 */
+        newsItems = newsItems.slice(0, 3);
+
+        /* No news */
+        if (newsItems.length === 0) {
+
+            homeNewsList.innerHTML = `
+                <div class="home-news-empty">
+                    <p>No news has been published yet.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        /* Display news */
+        newsItems.forEach(([id, news]) => {
+
+            const photo1 = news.Photo1 || "";
+            const photo2 = news.Photo2 || "";
+
+            homeNewsList.innerHTML += `
+
+                <article class="home-news-card">
+
+                    ${
+                        photo1 || photo2
+                        ? `
+                        <div class="home-news-images">
+
+                            ${
+                                photo1
+                                ? `
+                                <img
+                                    src="${photo1}"
+                                    alt="${news.Title || "News photo"}"
+                                >
+                                `
+                                : ""
+                            }
+
+                            ${
+                                photo2
+                                ? `
+                                <img
+                                    src="${photo2}"
+                                    alt="${news.Title || "News photo"}"
+                                >
+                                `
+                                : ""
+                            }
+
+                        </div>
+                        `
+                        : ""
+                    }
+
+                    <div class="home-news-content">
+
+                        ${
+                            news.Important
+                            ? `
+                            <span class="home-news-important">
+                                ⭐ IMPORTANT
+                            </span>
+                            `
+                            : ""
+                        }
+
+                        <h3>
+                            ${news.Title || ""}
+                        </h3>
+
+                        <div class="home-news-date">
+                            📅 ${news.Date || ""}
+                        </div>
+
+                        <p>
+                            ${news.Content || ""}
+                        </p>
+
+                    </div>
+
+                </article>
+
+            `;
+        });
+
+    }, (error) => {
+
+        console.error("News loading error:", error);
+
+        homeNewsList.innerHTML = `
+            <div class="home-news-empty">
+                <p>Unable to load news.</p>
+            </div>
+        `;
+
+    });
+
+}

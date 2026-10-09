@@ -67,6 +67,32 @@
     </main>
 
 
+<!-- News Photo Viewer -->
+<div id="newsPhotoViewer" class="news-photo-viewer" aria-hidden="true">
+    <button
+        type="button"
+        class="news-viewer-close"
+        id="closeNewsViewer"
+        aria-label="Close image viewer"
+    >&times;</button>
+
+    <div class="news-viewer-content">
+        <img id="newsViewerImage" src="" alt="News photograph">
+
+        <div class="news-viewer-actions">
+            <a
+                id="downloadNewsImage"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+            >⬇ Download Image</a>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="news.js"></script>
+
     <script type="module" src="news.js"></script>
 
 </body>

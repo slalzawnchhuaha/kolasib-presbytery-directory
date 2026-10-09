@@ -91,11 +91,49 @@ document.addEventListener("keydown", (event) => {
 
 const newsRef = ref(db, "news");
 
+/* =========================================
+   SHARE NEWS
+   ========================================= */
+
+function shareNews(id) {
+    const news = window.newsData?.[id];
+
+    if (!news) {
+        alert("Unable to find this news item.");
+        return;
+    }
+
+    const url = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(id)}`;
+
+    const text = `${news.Title || "Kolasib Presbytery News"}\n${news.Content || ""}\n\nRead more: ${url}`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: news.Title || "Kolasib Presbytery News",
+            text: text,
+            url: url
+        }).catch(error => {
+            if (error.name !== "AbortError") {
+                console.error("Sharing failed:", error);
+            }
+        });
+    } else {
+        window.open(
+            "https://wa.me/?text=" + encodeURIComponent(text),
+            "_blank",
+            "noopener,noreferrer"
+        );
+    }
+}
+
+window.shareNews = shareNews;
 
 onValue(newsRef, (snapshot) => {
 
     const data = snapshot.val() || {};
 
+    window.newsData = data;
+    
     newsPageList.innerHTML = "";
 
     let newsItems = Object.entries(data);
@@ -203,6 +241,14 @@ onValue(newsRef, (snapshot) => {
                         ${news.Content || ""}
                     </p>
 
+<div class="news-share-actions">
+    <button
+        type="button"
+        onclick="shareNews('${id}')"
+        class="news-share-btn"
+    >
+        ↗ Share News
+    </button>
                 </div>
 
             </article>

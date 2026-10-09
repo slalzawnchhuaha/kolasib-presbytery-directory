@@ -1731,3 +1731,42 @@ font:inherit;
 .news-share-btn:hover {
     background: #123d82;
 }
+
+/* Ensure Share News button is visible on phones */
+
+.news-share-actions {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100%;
+    margin-top: 18px;
+    padding-top: 14px;
+    box-sizing: border-box;
+}
+
+.news-share-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+@media (max-width: 600px) {
+    .news-share-actions {
+        display: block !important;
+        width: 100%;
+    }
+
+    .news-share-btn {
+        display: inline-flex !important;
+        width: auto;
+        min-height: 44px;
+        font-size: 14px;
+    }
+}

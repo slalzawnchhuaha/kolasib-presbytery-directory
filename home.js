@@ -126,7 +126,7 @@ if (homeNewsList) {
         });
 
         /* Show latest 3 */
-        newsItems = newsItems.slice(0, 3);
+       newsItems = newsItems.slice(0, 1);
 
         /* No news */
         if (newsItems.length === 0) {

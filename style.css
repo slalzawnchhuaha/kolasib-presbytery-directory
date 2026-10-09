@@ -1704,3 +1704,30 @@ font:inherit;
         right: 15px;
     }
 }
+
+/* NEWS SHARING */
+
+.news-share-actions {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #e5e9f0;
+}
+
+.news-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #174ea6;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.news-share-btn:hover {
+    background: #123d82;
+}

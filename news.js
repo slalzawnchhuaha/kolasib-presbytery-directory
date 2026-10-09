@@ -147,19 +147,12 @@ onValue(newsRef, (snapshot) => {
                         ${
                             photo1
                             ? `
-                            <a
-    href="${getDriveViewUrl(photo1)}"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="news-photo-link"
->
-    <img
+                            <img
     src="${photo1}"
     alt="${news.Title || "News photo"}"
-    onclick="openNewsPhoto('${photo1}', '${news.Title || "News photo"}')"
+    onclick="openNewsPhoto(this.src, this.alt)"
     style="cursor: zoom-in;"
 >
-</a>
                             `
                             : ""
                         }
@@ -167,19 +160,12 @@ onValue(newsRef, (snapshot) => {
                         ${
                             photo2
                             ? `
-                            <a
-    href="${getDriveViewUrl(photo2)}"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="news-photo-link"
->
-    <img
+                            <img
     src="${photo2}"
     alt="${news.Title || "News photo"}"
-    onclick="openNewsPhoto('${photo2}', '${news.Title || "News photo"}')"
+    onclick="openNewsPhoto(this.src, this.alt)"
     style="cursor: zoom-in;"
 >
-</a>
                             `
                             : ""
                         }

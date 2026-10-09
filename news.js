@@ -49,6 +49,46 @@ function getDriveViewUrl(imageUrl) {
 
 const newsPageList = document.getElementById("newsPageList");
 
+const newsPhotoViewer = document.getElementById("newsPhotoViewer");
+const newsViewerImage = document.getElementById("newsViewerImage");
+const closeNewsViewer = document.getElementById("closeNewsViewer");
+const downloadNewsImage = document.getElementById("downloadNewsImage");
+
+/* Open the photo viewer */
+function openNewsPhoto(imageUrl, title) {
+    newsViewerImage.src = imageUrl;
+    newsViewerImage.alt = title || "News photograph";
+    downloadNewsImage.href = imageUrl;
+
+    newsPhotoViewer.classList.add("active");
+    newsPhotoViewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+}
+
+window.openNewsPhoto = openNewsPhoto;
+
+/* Close the photo viewer */
+function closePhotoViewer() {
+    newsPhotoViewer.classList.remove("active");
+    newsPhotoViewer.setAttribute("aria-hidden", "true");
+    newsViewerImage.src = "";
+    document.body.style.overflow = "";
+}
+
+closeNewsViewer.addEventListener("click", closePhotoViewer);
+
+newsPhotoViewer.addEventListener("click", (event) => {
+    if (event.target === newsPhotoViewer) {
+        closePhotoViewer();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closePhotoViewer();
+    }
+});
+
 const newsRef = ref(db, "news");
 
 
@@ -114,9 +154,11 @@ onValue(newsRef, (snapshot) => {
     class="news-photo-link"
 >
     <img
-        src="${photo1}"
-        alt="${news.Title || "News photo"}"
-    >
+    src="${photo1}"
+    alt="${news.Title || "News photo"}"
+    onclick="openNewsPhoto('${photo1}', '${news.Title || "News photo"}')"
+    style="cursor: zoom-in;"
+>
 </a>
                             `
                             : ""
@@ -132,9 +174,11 @@ onValue(newsRef, (snapshot) => {
     class="news-photo-link"
 >
     <img
-        src="${photo2}"
-        alt="${news.Title || "News photo"}"
-    >
+    src="${photo2}"
+    alt="${news.Title || "News photo"}"
+    onclick="openNewsPhoto('${photo2}', '${news.Title || "News photo"}')"
+    style="cursor: zoom-in;"
+>
 </a>
                             `
                             : ""

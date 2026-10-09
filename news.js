@@ -29,6 +29,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+/* =========================================
+   GOOGLE DRIVE PHOTO LINK
+   ========================================= */
+
+function getDriveViewUrl(imageUrl) {
+    const match = imageUrl.match(/[?&]id=([^&]+)/);
+
+    if (match) {
+        return `https://drive.google.com/file/d/${match[1]}/view`;
+    }
+
+    return imageUrl;
+}
 
 /* =========================================
    LOAD NEWS
@@ -94,10 +107,17 @@ onValue(newsRef, (snapshot) => {
                         ${
                             photo1
                             ? `
-                            <img
-                                src="${photo1}"
-                                alt="${news.Title || "News photo"}"
-                            >
+                            <a
+    href="${getDriveViewUrl(photo1)}"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="news-photo-link"
+>
+    <img
+        src="${photo1}"
+        alt="${news.Title || "News photo"}"
+    >
+</a>
                             `
                             : ""
                         }
@@ -105,10 +125,17 @@ onValue(newsRef, (snapshot) => {
                         ${
                             photo2
                             ? `
-                            <img
-                                src="${photo2}"
-                                alt="${news.Title || "News photo"}"
-                            >
+                            <a
+    href="${getDriveViewUrl(photo2)}"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="news-photo-link"
+>
+    <img
+        src="${photo2}"
+        alt="${news.Title || "News photo"}"
+    >
+</a>
                             `
                             : ""
                         }

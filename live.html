@@ -1,115 +1,58 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YouTube Live</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube Live - Kolasib Presbytery</title>
 
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header class="hero small-hero">
+    <header class="hero small-hero">
+        <div class="top-bar">
+            <a href="index.html" class="back-btn">← Home</a>
+        </div>
 
-  <div class="top-bar">
-    <a href="index.html" class="back-btn">← Home</a>
-  </div>
+        <div class="hero-content">
+            <div class="logo-circle">
+                <img src="logo.png.png" alt="PCI Logo">
+            </div>
 
-  <div class="hero-content">
-    <div class="logo-circle">
-      <img src="logo.png.png" alt="PCI Logo">
-    </div>
+            <h1>YouTube Live</h1>
+            <p>Kolasib Presbytery Live Stream</p>
+        </div>
+    </header>
 
-    <h1>YouTube Live</h1>
-    <p>Kolasib Presbytery Live Stream</p>
-  </div>
+    <section class="programme-header">
+        <div class="theme-card">
 
-</header>
+            <div style="background:#000; border-radius:18px; overflow:hidden;">
+                <div style="position:relative; width:100%; aspect-ratio:16/9;">
+                    <iframe
+                        id="liveFrame"
+                        title="Kolasib Presbytery Live Stream"
+                        width="100%"
+                        height="100%"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        style="position:absolute; inset:0; border:0;">
+                    </iframe>
+                </div>
+            </div>
 
-<section class="programme-header">
+            <p id="liveStatus" style="margin-top:15px; text-align:center;">
+                Loading live stream...
+            </p>
 
-  <div class="theme-card">
+        </div>
+    </section>
 
-    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:18px;">
-
-      <iframe
-        src="https://www.youtube.com/embed/live_stream?channel=k.t.ptumpuibranchkolasib7510"
-        title="YouTube Live"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:18px;">
-      </iframe>
-
-    </div>
-
-  </div>
-
-</section>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YouTube Live</title>
-
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-<header class="hero small-hero">
-
-  <div class="top-bar">
-    <a href="index.html" class="back-btn">← Home</a>
-  </div>
-
-  <div class="hero-content">
-    <div class="logo-circle">
-      <img src="logo.png.png" alt="PCI Logo">
-    </div>
-
-    <h1>YouTube Live</h1>
-    <p>Kolasib Presbytery Live Stream</p>
-  </div>
-
-</header>
-
-<section class="programme-header">
-
-  <div class="theme-card">
-
-    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:18px;">
-
-      <section class="programme-header">
-
-  <div class="theme-card">
-
-    <box radius=xl clip background="#000">
-      <box aspectRatio="16:9">
-        <iframe
-          id="liveFrame"
-          width="100%"
-          height="100%"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-      </box>
-    </box>
-
-    <p id="liveStatus" style="margin-top:15px;text-align:center;">
-      Loading live stream...
-    </p>
-
-  </div>
-
-</section>
+    <script type="module" src="live.js"></script>
 
 </body>
 </html>
-<script type="module" src="live.js"></script>

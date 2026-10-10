@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Documents</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="hero small-hero">
+        <div class="top-bar">
+            <a href="admin.html" class="back-btn">← Admin Dashboard</a>
+        </div>
+        <div class="hero-content">
+            <h1>Manage Documents</h1>
+            <p>Add or remove PDF documents</p>
+        </div>
+    </header>
+
+    <main class="documents-container">
+        <div class="theme-card">
+            <h2>Add a Document</h2>
+
+            <form id="documentForm">
+                <label for="documentTitle">Document title</label>
+                <input id="documentTitle" type="text"
+                    placeholder="e.g. Souvenir" required>
+
+                <label for="documentDescription">Description</label>
+                <textarea id="documentDescription"
+                    placeholder="Short description"></textarea>
+
+                <label for="documentURL">Google Drive PDF link</label>
+                <input id="documentURL" type="url"
+                    placeholder="Paste the sharing link" required>
+
+                <button type="submit" class="menu-btn">
+                    Save Document
+                </button>
+
+                <p id="documentStatus" role="status"></p>
+            </form>
+        </div>
+
+        <h2>Existing Documents</h2>
+        <div id="adminDocumentsList">Loading documents...</div>
+    </main>
+
+    <script type="module" src="admin-documents.js"></script>
+</body>
+</html>

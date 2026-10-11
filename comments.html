@@ -1,1 +1,139 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitor Comments - Kolasib Presbytery</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .comments-container {
+      width: min(100% - 28px, 760px);
+      margin: 28px auto 50px;
+    }
+    .comments-card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+      margin-bottom: 28px;
+    }
+    .comments-card h2 {
+      color: #173b7a;
+      margin-top: 0;
+    }
+    #commentForm {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #commentForm label {
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    #commentForm input,
+    #commentForm textarea {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d6dce8;
+      border-radius: 10px;
+      font: inherit;
+    }
+    #commentForm textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    #commentForm button {
+      background: #173b7a;
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #commentStatus {
+      overflow-wrap: anywhere;
+      font-size: 14px;
+    }
+    .visitor-comment {
+      background: #fff;
+      padding: 18px;
+      border-radius: 14px;
+      margin: 14px 0;
+      border: 1px solid #e0e5ed;
+    }
+    .visitor-comment h3 {
+      margin: 0 0 4px;
+      color: #173b7a;
+      font-size: 17px;
+    }
+    .visitor-comment .comment-meta {
+      color: #667085;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .visitor-comment .comment-message {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 1.6;
+    }
+    @media (max-width: 600px) {
+      .comments-card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero small-hero">
+    <div class="top-bar">
+      <a href="index.html" class="back-btn">← Home</a>
+    </div>
+    <div class="hero-content">
+      <div class="logo-circle">
+        <img src="logo.png.png" alt="PCI Logo">
+      </div>
+      <h1>Visitor Comments</h1>
+      <p>Kolasib Presbytery Inkhawmpui Vawi 12-na</p>
+    </div>
+  </header>
+
+  <main class="comments-container">
+    <section class="comments-card">
+      <h2>Share Your Experience</h2>
+      <p>Leave a message or suggestion for the Presbytery.</p>
+
+      <form id="commentForm">
+        <label for="visitorName">Your name *</label>
+        <input id="visitorName" type="text" maxlength="80"
+          placeholder="Enter your name" required>
+
+        <label for="visitorChurch">Village or church (optional)</label>
+        <input id="visitorChurch" type="text" maxlength="100"
+          placeholder="Enter your village or church">
+
+        <label for="visitorMessage">Your comment *</label>
+        <textarea id="visitorMessage" maxlength="1000"
+          placeholder="Write your comment here..." required></textarea>
+
+        <button type="submit">Submit Comment</button>
+        <p id="commentStatus" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section>
+      <h2>Comments from Visitors</h2>
+      <div id="commentsList">
+        <p>Loading comments...</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="comments.js"></script>
+</body>
+</html>
+

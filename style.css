@@ -1912,3 +1912,70 @@ font:inherit;
         padding: 15px;
     }
 }
+
+
+/* Scrolling Announcement Bar */
+.announcement-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  overflow: hidden;
+  background: #f5d778;
+  color: #123b7a;
+  border-bottom: 1px solid #e5c35d;
+  box-sizing: border-box;
+}
+
+.announcement-label {
+  flex-shrink: 0;
+  padding: 12px 10px;
+  background: #e9c45a;
+  color: #123b7a;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.announcement-window {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.announcement-track {
+  display: flex;
+  width: max-content;
+  animation: presbytery-scroll 28s linear infinite;
+}
+
+.announcement-track span {
+  flex-shrink: 0;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@keyframes presbytery-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 480px) {
+  .announcement-label {
+    padding: 12px 7px;
+    font-size: 10px;
+  }
+
+  .announcement-track span {
+    padding: 12px 20px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-track {
+    animation: none;
+  }
+}
